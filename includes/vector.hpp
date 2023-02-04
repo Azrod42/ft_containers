@@ -11,10 +11,14 @@ class vector {
 		allocator_type	_allocator;
 
 	public:
-		vector();
-		vector(const vector<T> &copy);
+		//constructor
+		explicit vector (const allocator_type& alloc = allocator_type());
+		explicit vector (size_type n, const value_type& val = value_type(), const allocator_type& alloc = allocator_type());
+		template <class InputIterator> vector (InputIterator first, InputIterator last, const allocator_type& alloc = allocator_type());
+		vector (const vector& x);
+		//destructor
 		~vector();
-	
+		//operator
 		vector		&operator=(const vector<T> &copy);
 };
 #endif
