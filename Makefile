@@ -1,7 +1,7 @@
 NAME =container
 
 SRCS = main.cpp \
-		srcs/vector.tpp \
+		srcs/vector.ipp \
 
 INCLUDE = includes/* 
 
@@ -41,7 +41,7 @@ norm:
 
 git_add:
 	${_STATUS7}	
-	@git add ${SRCS} ${INCLUDE} Makefile
+	git add ${SRCS} ${INCLUDE} Makefile
 	${_DONE}
 	@git status | grep modif
 
