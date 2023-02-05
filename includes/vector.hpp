@@ -37,12 +37,20 @@ namespace ft
 				_vector = _alloc.allocate(_size);
 				(void)val;
 			};
-			iterator begin(){
+			iterator		begin(){
 				return (iterator(this->_vector));
 			};
-			const_iterator begin() const{
+			const_iterator	begin() const{
 				return (const_iterator(this->_vector));
 			};
+			iterator end(){
+				iterator it(this->_vector);
+				while (it)
+					it++;
+				it--;
+				return (it);
+			};
+			const_iterator end() const;
 			// explicit vectoc,czm                    size_type n, const value_type& val = value_type(), const allocator_type& alloc = allocator_type());
 			// template <class InputIterator> vector (InputIterator first, InputIterator last, const allocator_type& alloc = allocator_type());
 			// vector (const vector& x);
