@@ -50,10 +50,27 @@ namespace ft
 				this->_ptr++;
 				return (temp);
 			};
-			Iteratorv	operator+(Iteratorv const &obj) {
+			Iteratorv	operator+(size_t i) {
 				Iteratorv	temp(*this);
-				temp._ptr = obj._ptr;
+				temp._ptr += i;
 				return (temp);
+			};
+			Iteratorv	operator-(size_t i) {
+				Iteratorv	temp(*this);
+				temp._ptr -= i;
+				return (temp);
+			};
+			bool		operator<(const Iteratorv &rhs){
+				return (this->_ptr < rhs);
+			};
+			bool		operator<=(const Iteratorv &rhs){
+				return (this->_ptr <= rhs);
+			};
+			bool		operator>(const Iteratorv &rhs){
+				return (this->_ptr > rhs);
+			};
+			bool		operator>=(const Iteratorv &rhs){
+				return (this->_ptr >= rhs);
 			};
 
 
