@@ -29,16 +29,19 @@ namespace ft
 			bool		operator!=(const Iteratorv &rhs){
 				return (this->_ptr == rhs);
 			};
-			Iteratorv	operator*() {
-				return (this->_ptr);
+			pointer	operator*() {
+				return (_ptr);
+			}
+			reference	operator->() {
+				return (*_ptr);
 			}
 			Iteratorv	operator++(){
 				this->_ptr++;
-				return (this->_ptr);
+				return (*this);
 			};
 			Iteratorv	operator--(){
 				this->_ptr--;
-				return (this->_ptr);
+				return (*this);
 			};
 			Iteratorv	operator++(int){
 				Iteratorv temp(*this);
@@ -72,9 +75,17 @@ namespace ft
 			bool		operator>=(const Iteratorv &rhs){
 				return (this->_ptr >= rhs);
 			};
-
-
-
+			Iteratorv	operator+=(size_t i){
+				this->_ptr += i;
+				return (*this);
+			};
+			Iteratorv	operator-=(size_t i){
+				this->_ptr -= i;
+				return (*this);
+			};
+			Iteratorv	operator[](size_t i){
+				return (this->_ptr[i]);
+			};
 	};
 }
 #endif
