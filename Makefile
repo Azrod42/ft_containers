@@ -1,7 +1,6 @@
 NAME =container
 
 SRCS = main.cpp \
-		srcs/vector.ipp \
 
 INCLUDE = includes/* 
 
