@@ -4,16 +4,20 @@
 # include<iostream>
 # include<cmath>
 # include<cstdio>
+# include"iteratorv.hpp"
 
 namespace ft
 {
 	template <typename T, typename Alloc = std::allocator<T> >
 	class vector {
 		public:
-			typedef T*		pointer;
-			typedef T		value_type;
-			typedef size_t	size_type;
-			typedef Alloc	allocator_type;	
+			typedef T*					pointer;
+			typedef T					value_type;
+			typedef size_t				size_type;
+			typedef Alloc				allocator_type;	
+			typedef ft::Iteratorv<T> 	iterator;
+			typedef ft::Citeratorv<T> 	const_iterator;
+			typedef ft::Riteratorv<T> 	reverse_iterator;
 
 		private:
 			pointer			_vector;
@@ -32,6 +36,12 @@ namespace ft
 				std::cout << "Constructor size" << std::endl;
 				_vector = _alloc.allocate(_size);
 				(void)val;
+			};
+			iterator begin(){
+				return (iterator(this->_vector));
+			};
+			const_iterator begin() const{
+				return (const_iterator(this->_vector));
 			};
 			// explicit vectoc,czm                    size_type n, const value_type& val = value_type(), const allocator_type& alloc = allocator_type());
 			// template <class InputIterator> vector (InputIterator first, InputIterator last, const allocator_type& alloc = allocator_type());
