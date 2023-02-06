@@ -5,7 +5,7 @@
 int main(void)
 {
 	// ft::vector<int> test(5);
-	std::vector<int> tete(5);
+	ft::vector<int> tete(5);
 
 	tete.push_back(5);
 	tete.push_back(4);
@@ -13,10 +13,7 @@ int main(void)
 	tete.push_back(2);
 	tete.push_back(1);
 
-	typedef typename ft::Iteratorv<std::vector<int> > it;
-
-	it = tete.begin();
-
+	std::cout << tete[1] << std::endl;
 
 	// test.~vector();
 }

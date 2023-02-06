@@ -66,16 +66,16 @@ namespace ft
 			const_reverse_iterator rend() const {
 				return(const_reverse_iterator(this->_vector + this->_size_fill));
 			};
-			const_iterator cbegin() const noexcept{
+			const_iterator cbegin() const {
 				return (const_iterator(this->_vector));
 			};
-			const_iterator cend() const noexcept{
+			const_iterator cend() const {
 				return (const_iterator(this->_vector + this->_size_fill));
 			};
-			const_reverse_iterator crbegin() const noexcept{
+			const_reverse_iterator crbegin() const {
 				return(const_reverse_iterator(this->_vector));
 			};
-			const_reverse_iterator crend() const noexcept{
+			const_reverse_iterator crend() const{
 				return (const_reverse_iterator(this->_vector + this->_size_fill));
 			};
 			///////////////////////////////////////
@@ -111,7 +111,7 @@ namespace ft
 				for(size_type i = 0; i < this->_size_fill; i++){
 					rep[i] = this->_vector[i];
 				}
-				this->_alloc.dealocate(this->_vector, this->_size);
+				this->_alloc.deallocate(this->_vector, this->_size);
 				this->_size = n;
 			};
 			void shrink_to_fit();
@@ -122,9 +122,7 @@ namespace ft
 			//			  Modifiers:             //
 			///////////////////////////////////////
 			template <class InputIterator>
-			void assign (InputIterator first, InputIterator last){
-				
-			};
+			void assign (InputIterator first, InputIterator last);
 			void assign (size_type n, const value_type& val);
 			void push_back (const value_type& val){
 				if (this->_size_fill > this->_size - 1)
@@ -132,7 +130,7 @@ namespace ft
 				this->_vector[this->_size_fill] = val;
 				this->_size_fill++;
 			};
-			void pop_back(){};
+			void pop_back();
 			iterator insert(iterator position, const value_type& val){
 					size_type i = 0;
 					iterator it = begin();
@@ -141,7 +139,6 @@ namespace ft
 						reserve(this->_size_fill + 1);
 					for(size_type j = this->_size - 1; j > i; j--) {
 						this->_vector[j] = this->_vector[j - 1];
-						j--;
 					}
 					this->_vector[i] = val;
 					this->_size_fill++;
@@ -154,9 +151,10 @@ namespace ft
 			};
 			template <class InputIterator>
 			void insert (iterator position, InputIterator first, InputIterator last){
-				for(void; first != last; first++) {
+				for(int i; first != last; first++) {
 					insert(position, *first);
 					position++;
+					(void)i;
 				}
 			};
 			iterator erase (iterator position);

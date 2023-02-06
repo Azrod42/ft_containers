@@ -97,7 +97,9 @@ namespace ft
 		public:
 			Riteratorv(){};
 			~Riteratorv(){};
-			Riteratorv(pointer ptr) : _ptr(ptr){};
+			Riteratorv(pointer ptr) {
+				this->_ptr = ptr;
+			};
 			Riteratorv(const Riteratorv &rhs){ *this = rhs; };
 			Riteratorv 	&operator=(const Riteratorv &rhs) {
 				this->_ptr = rhs._ptr;
@@ -177,16 +179,18 @@ namespace ft
 		public:
 			Citeratorv(){};
 			~Citeratorv(){};
-			Citeratorv(pointer ptr) : _ptr(ptr){};
+			Citeratorv(pointer ptr) {
+				this->_ptr = ptr;
+			};
 			Citeratorv(const Citeratorv &rhs){ *this = rhs; };
 			Citeratorv 	&operator=(const Citeratorv &rhs) {
 				this->_ptr = rhs._ptr;
 				return (*this);
 			};
-			const reference	operator*() {
+			value_type	*operator*() {
 				return (*this->_ptr);
 			};
-			const pointer	operator->() {
+			value_type	&operator->() {
 				return (this->_ptr);
 			};
 			const value_type	&operator[](size_t i){
@@ -203,16 +207,18 @@ namespace ft
 		public:
 			CRiteratorv(){};
 			~CRiteratorv(){};
-			CRiteratorv(pointer ptr) : _ptr(ptr){};
+			CRiteratorv(pointer ptr) {
+				this->_ptr = ptr;
+			};
 			CRiteratorv(const CRiteratorv &rhs){ *this = rhs; };
 			CRiteratorv 	&operator=(const CRiteratorv &rhs) {
 				this->_ptr = rhs._ptr;
 				return (*this);
 			};
-			const reference	operator*() {
+			value_type	&operator*() {
 				return (*this->_ptr);
 			};
-			const pointer	operator->() {
+			value_type	*operator->() {
 				return (this->_ptr);
 			};
 			const value_type	&operator[](size_t i){
