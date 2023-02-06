@@ -193,5 +193,31 @@ namespace ft
 				return (*this->_ptr[i]);
 			};
 	};
+	template <class T> 
+	class CRiteratorv : public Iteratorv<T>
+	{
+		public:
+			typedef T	value_type;
+			typedef T*	pointer;
+			typedef T&	reference;
+		public:
+			CRiteratorv(){};
+			~CRiteratorv(){};
+			CRiteratorv(pointer ptr) : _ptr(ptr){};
+			CRiteratorv(const CRiteratorv &rhs){ *this = rhs; };
+			CRiteratorv 	&operator=(const CRiteratorv &rhs) {
+				this->_ptr = rhs._ptr;
+				return (*this);
+			};
+			const reference	operator*() {
+				return (*this->_ptr);
+			};
+			const pointer	operator->() {
+				return (this->_ptr);
+			};
+			const value_type	&operator[](size_t i){
+				return (*this->_ptr[i]);
+			};
+	};
 }
 #endif
