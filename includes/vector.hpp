@@ -102,25 +102,37 @@ namespace ft
 				this->_size = n;
 			};
 			size_type capacity() const;
-			bool empty() const;
+			bool empty() const {
+				return(this->_size_fill == 0);
+			};
 			void reserve (size_type n);
 			void shrink_to_fit();
 			///////////////////////////////////////
 			//			Element access:          //
 			///////////////////////////////////////
-
-
-
-
-
-
-			// explicit vectoc,czm                    size_type n, const value_type& val = value_type(), const allocator_type& alloc = allocator_type());
-			// template <class InputIterator> vector (InputIterator first, InputIterator last, const allocator_type& alloc = allocator_type());
-			// vector (const vector& x);
-			//destructor
-			// ~vector();
-			//operator
-			// vector		&operator=(const vector<T> &copy);
+			///////////////////////////////////////
+			//			  Modifiers:             //
+			///////////////////////////////////////
+			template <class InputIterator>
+			void assign (InputIterator first, InputIterator last){
+				
+			};
+			void assign (size_type n, const value_type& val);
+			void push_back (const value_type& val);
+			void pop_back();
+			iterator insert (iterator position, const value_type& val);
+			void insert (iterator position, size_type n, const value_type& val);
+			template <class InputIterator>
+			void insert (iterator position, InputIterator first, InputIterator last);
+			iterator erase (iterator position);iterator erase (iterator first, iterator last);
+			void swap (vector& x);
+			void clear();
+			//emplace
+			//emplace_back
+			///////////////////////////////////////
+			//			  Allocator:             //
+			///////////////////////////////////////
+			allocator_type get_allocator() const;
 	};
 }
 #endif
