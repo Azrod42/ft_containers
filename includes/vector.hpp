@@ -96,7 +96,6 @@ namespace ft
 				for(size_type i = this->_size_fill; i < this->_size; i++){
 					rep[i] = val;
 				}
-
 				this->_alloc.deallocate(this->_vector.data(), this->_vector.capacity());
 				this->_vector = rep;
 				this->_size = n;
@@ -105,7 +104,16 @@ namespace ft
 			bool empty() const {
 				return(this->_size_fill == 0);
 			};
-			void reserve (size_type n);
+			void reserve (size_type n){
+				if (n < this->_size)
+					return ;
+				pointer rep = this->_alloc.allocate(n);
+				for(size_type i = 0; i < this->_size_fill; i++){
+					rep[i] = this->_vector[i];
+				}
+				this->_alloc.dealocate(this->_vector, this->_size);
+				this->_size = n;
+			};
 			void shrink_to_fit();
 			///////////////////////////////////////
 			//			Element access:          //
@@ -118,12 +126,39 @@ namespace ft
 				
 			};
 			void assign (size_type n, const value_type& val);
-			void push_back (const value_type& val);
+			void push_back (const value_type& val){
+				if (this->_size_fill > this->_size - 1)
+					reserve(this->_size + 1);
+				this->_vector[this->_size_fill] = val;
+				this->_size_fill++;
+			};
 			void pop_back();
-			iterator insert (iterator position, const value_type& val);
-			void insert (iterator position, size_type n, const value_type& val);
+			iterator insert(iterator position, const value_type& val){
+					size_type i = 0;
+					iterator it = begin();
+					for (iterator it = begin(); it + i != position && i < this->_size_fill; i++){};
+					if (this->_size < this->_size_fill + 1)
+						reserve(this->_size_fill + 1);
+					for(size_type j = this->_size - 1; j > i; j--) {
+						this->_vector[j] = this->_vector[j - 1];
+						j--;
+					}
+					this->_vector[i] = val;
+					this->_size_fill++;
+					return (iterator(this->_vector[i]));
+			};
+			void insert (iterator position, size_type n, const value_type& val){
+				for(size_type i = 0; i - n >= 0; i++){
+					insert(position, val);
+				}
+			};
 			template <class InputIterator>
-			void insert (iterator position, InputIterator first, InputIterator last);
+			void insert (iterator position, InputIterator first, InputIterator last){
+				for(void; first != last; first++) {
+					insert(position, *first);
+					position++;
+				}
+			};
 			iterator erase (iterator position);
 			iterator erase (iterator first, iterator last);
 			void swap (vector& x);
