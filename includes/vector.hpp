@@ -132,7 +132,7 @@ namespace ft
 				this->_vector[this->_size_fill] = val;
 				this->_size_fill++;
 			};
-			void pop_back();
+			void pop_back(){};
 			iterator insert(iterator position, const value_type& val){
 					size_type i = 0;
 					iterator it = begin();
