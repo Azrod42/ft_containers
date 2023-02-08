@@ -12,6 +12,8 @@ namespace ft
 	class vector {
 		public:
 			typedef T*					pointer;
+			typedef &T					reference;
+			typedef const &T			const_reference;
 			typedef T					value_type;
 			typedef size_t				size_type;
 			typedef Alloc				allocator_type;	
@@ -118,6 +120,12 @@ namespace ft
 			///////////////////////////////////////
 			//			Element access:          //
 			///////////////////////////////////////
+			reference operator[] (size_type n){
+				return(*this->_vector[n]);
+			};
+			const_reference operator[] (size_type n) const{
+				return (*this->_vector[n]);
+			};
 			///////////////////////////////////////
 			//			  Modifiers:             //
 			///////////////////////////////////////
