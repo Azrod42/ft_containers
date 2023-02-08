@@ -12,8 +12,8 @@ namespace ft
 	class vector {
 		public:
 			typedef T*					pointer;
-			typedef &T					reference;
-			typedef const &T			const_reference;
+			typedef T&					reference;
+			typedef const T&			const_reference;
 			typedef T					value_type;
 			typedef size_t				size_type;
 			typedef Alloc				allocator_type;	
@@ -38,8 +38,14 @@ namespace ft
 			explicit vector (size_type n, const value_type& val = value_type(), const allocator_type& alloc = allocator_type()) 
 			: _vector(0), _size(n), _size_fill(0), _alloc(alloc){
 				std::cout << "Constructor size" << std::endl;
-				_vector = _alloc.allocate(_size);
-				(void)val;
+				_vector = _alloc.allocate(0);
+				insert(begin(), n, val);
+			};
+			template <class InputIterator>
+			vector (InputIterator first, InputIterator last, const allocator_type& alloc = allocator_type())
+			: _vector(0), _size(0), _size_fill(0), _alloc(alloc){
+				this->_vector = this->_alloc.allocate(0);
+				insert(begin(), first, last);
 			};
 			///////////////////////////////////////
 			//			Iterators:               //
@@ -98,7 +104,8 @@ namespace ft
 				for(size_type i = this->_size_fill; i < this->_size; i++){
 					rep[i] = val;
 				}
-				this->_alloc.deallocate(this->_vector.data(), this->_vector.capacity());
+				std::cout << "ok" <<std::endl;
+				this->_alloc.deallocate(this->_vector, this->_size);
 				this->_vector = rep;
 				this->_size = n;
 			};
@@ -110,18 +117,19 @@ namespace ft
 				if (n < this->_size)
 					return ;
 				pointer rep = this->_alloc.allocate(n);
-				for(size_type i = 0; i < this->_size_fill; i++){
+				for(size_type i = 0; i <= this->_size_fill; i++){
 					rep[i] = this->_vector[i];
 				}
 				this->_alloc.deallocate(this->_vector, this->_size);
 				this->_size = n;
+				this->_vector = rep;
 			};
 			void shrink_to_fit();
 			///////////////////////////////////////
 			//			Element access:          //
 			///////////////////////////////////////
 			reference operator[] (size_type n){
-				return(*this->_vector[n]);
+				return(this->_vector[n]);
 			};
 			const_reference operator[] (size_type n) const{
 				return (*this->_vector[n]);
@@ -130,18 +138,26 @@ namespace ft
 			//			  Modifiers:             //
 			///////////////////////////////////////
 			template <class InputIterator>
-			void assign (InputIterator first, InputIterator last);
-			void assign (size_type n, const value_type& val);
+			void assign (InputIterator first, InputIterator last){
+				clear();
+				insert(begin(), first, last);	
+			};
+			void assign (size_type n, const value_type& val){
+				clear();
+				insert(begin(), n, val);
+			};
 			void push_back (const value_type& val){
-				if (this->_size_fill > this->_size - 1)
-					reserve(this->_size + 1);
+				if (this->_size_fill + 1 > this->_size)
+				{
+					reserve((this->_size + 1));
+				}
 				this->_vector[this->_size_fill] = val;
-				this->_size_fill++;
+				this->_size_fill += 1;
 			};
 			void pop_back();
 			iterator insert(iterator position, const value_type& val){
 					size_type i = 0;
-					iterator it = begin();
+
 					for (iterator it = begin(); it + i != position && i < this->_size_fill; i++){};
 					if (this->_size < this->_size_fill + 1)
 						reserve(this->_size_fill + 1);
@@ -150,25 +166,30 @@ namespace ft
 					}
 					this->_vector[i] = val;
 					this->_size_fill++;
-					return (iterator(this->_vector[i]));
+					return (iterator(&this->_vector[i]));
 			};
 			void insert (iterator position, size_type n, const value_type& val){
-				for(size_type i = 0; i - n >= 0; i++){
+				for(size_type i = 0; i < n; i++){
 					insert(position, val);
 				}
 			};
 			template <class InputIterator>
 			void insert (iterator position, InputIterator first, InputIterator last){
-				for(int i; first != last; first++) {
-					insert(position, *first);
-					position++;
-					(void)i;
-				}
+				while (first != last){
+					position = insert(position, *first) + 1;
+					++first;
+				} 
 			};
 			iterator erase (iterator position);
 			iterator erase (iterator first, iterator last);
 			void swap (vector& x);
-			void clear();
+			void clear(){
+				if (this->_size){
+					this->_alloc.deallocate(this->_vector, this->_size);
+					this->_vector = this->_alloc.allocate(0);
+					this->_size = 0;
+				} 
+			};
 			//emplace
 			//emplace_back
 			///////////////////////////////////////
