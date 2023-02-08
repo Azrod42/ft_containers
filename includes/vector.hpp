@@ -45,7 +45,7 @@ namespace ft
 			vector (InputIterator first, InputIterator last, const allocator_type& alloc = allocator_type())
 			: _vector(0), _size(0), _size_fill(0), _alloc(alloc){
 				this->_vector = this->_alloc.allocate(0);
-				insert(begin(), first, last);
+				assign(first, last);
 			};
 			///////////////////////////////////////
 			//			Iterators:               //
@@ -93,7 +93,7 @@ namespace ft
 				return (this->_size_fill);
 			};
 			size_type max_size() const{
-				return (this->_size);
+				return (std::numeric_limits<size_type>::max() / sizeof(value_type));
 			};
 			void resize (size_type n, value_type val = value_type()){
 				pointer rep;
@@ -133,6 +133,30 @@ namespace ft
 			};
 			const_reference operator[] (size_type n) const{
 				return (*this->_vector[n]);
+			};
+			reference at (size_type n) {
+				return (this->_vector[n]);
+			};
+			const_reference at (size_type n) const {
+				return (*this->_vector[n]);
+			};
+			reference front(){
+				return (this->_vector[0]);
+			};
+			const_reference front() const {
+				return (*this->_vector[0]);
+			};
+			reference back(){
+				return (this->_vector[this->_size_fill - 1]);
+			};
+			const_reference back() const {
+				return (*this->_vector[this->_size_fill - 1]);
+			};
+			value_type* data() {
+				return (this->_vector);
+			};
+			const value_type* data() const {
+				return (this->_vector);
 			};
 			///////////////////////////////////////
 			//			  Modifiers:             //
@@ -176,7 +200,7 @@ namespace ft
 			template <class InputIterator>
 			void insert (iterator position, InputIterator first, InputIterator last){
 				while (first != last){
-					position = insert(position, *first) + 1;
+					position = (insert(position, *first)) + 1;
 					++first;
 				} 
 			};
