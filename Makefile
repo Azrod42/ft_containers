@@ -40,7 +40,7 @@ norm:
 
 git_add:
 	${_STATUS7}	
-	git add ${SRCS} ${INCLUDE} Makefile
+	git add ${SRCS} ${INCLUDE} Makefile note
 	${_DONE}
 	@git status | grep modif
 
