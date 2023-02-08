@@ -32,12 +32,10 @@ namespace ft
 			//constructor
 			explicit vector(const allocator_type& alloc = allocator_type())
 			: _vector(0), _size(0), _size_fill(0), _alloc(alloc){
-				std::cout << "Constructor default" << std::endl;
 				_vector = _alloc.allocate(0);
 			};
 			explicit vector (size_type n, const value_type& val = value_type(), const allocator_type& alloc = allocator_type()) 
 			: _vector(0), _size(n), _size_fill(0), _alloc(alloc){
-				std::cout << "Constructor size" << std::endl;
 				_vector = _alloc.allocate(0);
 				insert(begin(), n, val);
 			};
@@ -104,7 +102,6 @@ namespace ft
 				for(size_type i = this->_size_fill; i < this->_size; i++){
 					rep[i] = val;
 				}
-				std::cout << "ok" <<std::endl;
 				this->_alloc.deallocate(this->_vector, this->_size);
 				this->_vector = rep;
 				this->_size = n;
@@ -204,7 +201,9 @@ namespace ft
 					++first;
 				} 
 			};
-			iterator erase (iterator position);
+			iterator erase (iterator position){
+				
+			};
 			iterator erase (iterator first, iterator last);
 			void swap (vector& x);
 			void clear(){

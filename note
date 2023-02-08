@@ -39,5 +39,5 @@ swap	Swap content (public member function)
 emplace	Construct and insert element (public member function)
 emplace_back	Construct and insert element at the end (public member function)
 
-Allocator:
+# Allocator:
 get_allocator	Get allocator (public member function)
