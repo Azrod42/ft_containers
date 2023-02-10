@@ -11,7 +11,7 @@ namespace ft
 			typedef T*	pointer;
 			typedef T&	reference;
 			
-		private:
+		protected:
 			pointer _ptr;
 			
 		public:
@@ -27,13 +27,13 @@ namespace ft
 				return (this->_ptr == rhs._ptr);
 			};
 			bool		operator!=(const Iteratorv &rhs){
-				return (this->_ptr == rhs._ptr);
-			};
-			pointer	operator*() {
-				return (_ptr);
-			};
-			reference	operator->() {
+				return (this->_ptr != rhs._ptr);
+			};	
+			value_type	&operator*() {
 				return (*_ptr);
+			};
+			value_type	*operator->() {
+				return (_ptr);
 			};
 			Iteratorv	&operator++(){
 				this->_ptr++;
@@ -109,12 +109,12 @@ namespace ft
 				return (this->_ptr == rhs._ptr);
 			};
 			bool		operator!=(const Riteratorv &rhs){
-				return (this->_ptr == rhs._ptr);
+				return (this->_ptr != rhs._ptr);
 			};
-			reference	operator*() {
+			value_type	&operator*() {
 				return (*this->_ptr);
 			};
-			pointer		operator->() {
+			value_type	*operator->() {
 				return (this->_ptr);
 			};
 			Riteratorv	&operator++(){
@@ -187,10 +187,10 @@ namespace ft
 				this->_ptr = rhs._ptr;
 				return (*this);
 			};
-			value_type	*operator*() {
+			value_type	&operator*() {
 				return (*this->_ptr);
 			};
-			value_type	&operator->() {
+			value_type	*operator->() {
 				return (this->_ptr);
 			};
 			const value_type	&operator[](size_t i){

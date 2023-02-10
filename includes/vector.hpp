@@ -45,32 +45,45 @@ namespace ft
 				this->_vector = this->_alloc.allocate(0);
 				assign(first, last);
 			};
+			vector (const vector& x){
+				*this = x;
+			};
+			vector &operator=(const vector &copy) {
+				if (this->_vector != 0)
+					this->_alloc.deallocate(this->_vector, this->_size);
+				this->_size = copy._size;
+				this->_size_fill = copy._size_fill;
+				this->_alloc = copy.get_allocator();
+				this->_vector = this->_alloc.allocate(0);
+				assign(copy.begin(), copy.end());
+				return (*this);
+			}
 			///////////////////////////////////////
 			//			Iterators:               //
 			///////////////////////////////////////
 			iterator		begin(){
-				return (iterator(this->_vector));
+				return (iterator(&this->_vector[0]));
 			};
 			const_iterator	begin() const{
-				return (const_iterator(this->_vector));
+				return (const_iterator(&this->_vector[0]));
 			};
 			iterator end(){
-				return (iterator(this->_vector + this->_size_fill));
+				return (iterator(&this->_vector[this->_size_fill]));
 			};
 			const_iterator end() const{
-				return (const_iterator(this->_vector + this->_size_fill));
+				return (const_iterator(&this->_vector[this->_size_fill]));
 			};
 			reverse_iterator rbegin(){
-				return(reverse_iterator(this->_vector));
+				return(reverse_iterator(this->_vector + this->_size_fill -1));
 			}
 			const_reverse_iterator rbegin() const{
-				return(const_reverse_iterator(this->_vector));
+				return(const_reverse_iterator(this->_vector + this->_size_fill -1));
 			};
 			reverse_iterator rend(){
-				return(reverse_iterator(this->_vector + this->_size_fill));
+				return(reverse_iterator(this->_vector - 1));
 			};
 			const_reverse_iterator rend() const {
-				return(const_reverse_iterator(this->_vector + this->_size_fill));
+				return(const_reverse_iterator(this->_vector - 1));
 			};
 			const_iterator cbegin() const {
 				return (const_iterator(this->_vector));
@@ -106,7 +119,9 @@ namespace ft
 				this->_vector = rep;
 				this->_size = n;
 			};
-			size_type capacity() const;
+			size_type capacity() const{
+				return (this->_size);
+			};
 			bool empty() const {
 				return(this->_size_fill == 0);
 			};
@@ -121,7 +136,17 @@ namespace ft
 				this->_size = n;
 				this->_vector = rep;
 			};
-			void shrink_to_fit();
+			void shrink_to_fit(){
+				if (this->_size > this->_size_fill){
+					pointer rep = this->_alloc.allocate(this->_size_fill);
+					for (size_type i = 0; i <= this->_size_fill; i++) {
+						rep[i] = this->_vector[i];
+					}
+					this->_alloc.deallocate(this->_vector, this->_size);
+					this->_size = this->_size_fill;
+					this->_vector = rep;
+				}
+			};
 			///////////////////////////////////////
 			//			Element access:          //
 			///////////////////////////////////////
@@ -175,7 +200,10 @@ namespace ft
 				this->_vector[this->_size_fill] = val;
 				this->_size_fill += 1;
 			};
-			void pop_back();
+			void pop_back(){
+				if (this->_size_fill)
+					this->_size_fill--;
+			};
 			iterator insert(iterator position, const value_type& val){
 					size_type i = 0;
 
@@ -202,9 +230,28 @@ namespace ft
 				} 
 			};
 			iterator erase (iterator position){
-				
+				iterator	it = position;
+
+				while ((it + 1) != end())
+					{
+						*it = *(it + 1);
+						it++;
+					}
+					*(it + 1) = 0;
+				this->_size_fill -= 1;
+				return (iterator(position));
 			};
-			iterator erase (iterator first, iterator last);
+			iterator erase (iterator first, iterator last){
+				size_type i = 0;
+
+				while (first + i != last)
+				 	i++;
+				while (i > 0) {
+					erase(first);
+					i--;
+				}
+				return (iterator(first));
+			};
 			void swap (vector& x);
 			void clear(){
 				if (this->_size){
@@ -218,7 +265,10 @@ namespace ft
 			///////////////////////////////////////
 			//			  Allocator:             //
 			///////////////////////////////////////
-			allocator_type get_allocator() const;
+			allocator_type get_allocator() const{
+				allocator_type ret = this->_alloc;
+				return (ret);
+			};
 	};
 }
 #endif
