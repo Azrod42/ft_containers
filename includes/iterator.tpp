@@ -75,9 +75,33 @@ bool		ft::operator==(const random_access_iterator_tag<T> &it1, const random_acce
 	return (it1.ptr == it2.ptr);
 }
 
+template <typename T>
+bool		ft::operator!=(const random_access_iterator_tag<T> &it1, const random_access_iterator_tag<T> &it2){
+	return (it1.ptr != it2.ptr);
+}
 
+template <typename T>
+bool		ft::operator<(const random_access_iterator_tag<T> &it1, const random_access_iterator_tag<T> &it2){
+	return (it1.ptr < it2.ptr);
+}
 
+template <typename T>
+bool		ft::operator<=(const random_access_iterator_tag<T> &it1, const random_access_iterator_tag<T> &it2){
+	return (it1.ptr <= it2.ptr);
+}
 
+template <typename T>
+bool		ft::operator>(const random_access_iterator_tag<T> &it1, const random_access_iterator_tag<T> &it2){
+	return (it1.ptr > it2.ptr);
+}
 
+template <typename T>
+bool		ft::operator>=(const random_access_iterator_tag<T> &it1, const random_access_iterator_tag<T> &it2){
+	return (it1.ptr >= it2.ptr);
+}
 
+template <typename T>
+random_access_iterator_tag<T>		ft::operator+=(const random_access_iterator_tag<T> &it1, typename random_access_iterator_tag<T>::difference_type n){
+	return (it1.ptr == it2.ptr);
+}
 #endif

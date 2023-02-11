@@ -28,19 +28,19 @@ namespace ft
 			value_type					*operator->();
 	};
 		template <typename T>
-		bool		operator==(const random_access_iterator_tag<T> &, const random_access_iterator_tag<T> &);
+		bool		operator==(const random_access_iterator_tag<T> &it1, const random_access_iterator_tag<T> &it2);
 		template <typename T>
-		bool		operator!=(const random_access_iterator_tag<T> &, const random_access_iterator_tag<T> &);
+		bool		operator!=(const random_access_iterator_tag<T> &it1, const random_access_iterator_tag<T> &it2);
 		template <typename T>
-		bool		operator<(const random_access_iterator_tag<T> &, const random_access_iterator_tag<T> &);
+		bool		operator<(const random_access_iterator_tag<T> &it1, const random_access_iterator_tag<T> &it2);
 		template <typename T>
-		bool		operator<=(const random_access_iterator_tag<T> &, const random_access_iterator_tag<T> &);
+		bool		operator<=(const random_access_iterator_tag<T> &it1, const random_access_iterator_tag<T> &it2);
 		template <typename T>
-		bool		operator>(const random_access_iterator_tag<T> &, const random_access_iterator_tag<T> &);
+		bool		operator>(const random_access_iterator_tag<T> &it1, const random_access_iterator_tag<T> &it2);
 		template <typename T>
-		bool		operator>=(const random_access_iterator_tag<T> &, const random_access_iterator_tag<T> &);
+		bool		operator>=(const random_access_iterator_tag<T> &it1, const random_access_iterator_tag<T> &it2);
 		template <typename T>
-		random_access_iterator_tag<T>	operator+=(const random_access_iterator_tag<T> &, typename random_access_iterator_tag<T>::difference_type);
+		random_access_iterator_tag<T>	&operator+=(const random_access_iterator_tag<T> &, typename random_access_iterator_tag<T>::difference_type);
 		template <typename T>
 		random_access_iterator_tag<T>	operator-=(const random_access_iterator_tag<T> &, typename random_access_iterator_tag<T>::difference_type);
 		template <typename T>
