@@ -143,6 +143,7 @@ random_access_iterator_tag<T>		ft::operator-(typename random_access_iterator_tag
 template <typename T>
 typename random_access_iterator_tag<T>::difference_type		ft::operator-(const random_access_iterator_tag<T> &it1, const random_access_iterator_tag<T> &it2){
 	typename random_access_iterator_tag<T>::difference_type tmp;
+
 	if (it1.ptr > b.ptr)
 		tmp = it1.ptr - it2.ptr;
 	else
