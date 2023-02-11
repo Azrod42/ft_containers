@@ -11,19 +11,19 @@ namespace ft
 			typedef T&				reference;
 			typedef std::ptrdiff_t	difference_type;
 			
-			pointer _ptr;
+			pointer ptr;
 			
 			random_access_iterator_tag();
 			~random_access_iterator_tag();
-			random_access_iterator_tag(pointer ptr);
-			random_access_iterator_tag(const random_access_iterator_tag &rhs);
+			random_access_iterator_tag(pointer ptrin);
+			random_access_iterator_tag(const random_access_iterator_tag<T> &rhs);
 
 			random_access_iterator_tag 	&operator=(const random_access_iterator_tag &rhs);
 			random_access_iterator_tag	&operator++();
 			random_access_iterator_tag	&operator--();
 			random_access_iterator_tag	operator++(int);
 			random_access_iterator_tag	operator--(int);
-			value_type					&operator[](size_t i);
+			value_type					&operator[](unsigned long i);
 			value_type					&operator*();
 			value_type					*operator->();
 	};
@@ -40,24 +40,24 @@ namespace ft
 		template <typename T>
 		bool		operator>=(const random_access_iterator_tag<T> &, const random_access_iterator_tag<T> &);
 		template <typename T>
-		random_access_iterator_tag	operator+=(const random_access_iterator_tag<T> &, typename random_access_iterator_tag<T>::difference_type);
+		random_access_iterator_tag<T>	operator+=(const random_access_iterator_tag<T> &, typename random_access_iterator_tag<T>::difference_type);
 		template <typename T>
-		random_access_iterator_tag	operator-=(const random_access_iterator_tag<T> &, typename random_access_iterator_tag<T>::difference_type);
+		random_access_iterator_tag<T>	operator-=(const random_access_iterator_tag<T> &, typename random_access_iterator_tag<T>::difference_type);
 		template <typename T>
-		random_access_iterator_tag	operator+(const random_access_iterator_tag<T> &, typename random_access_iterator_tag<T>::difference_type);
+		random_access_iterator_tag<T>	operator+(const random_access_iterator_tag<T> &, typename random_access_iterator_tag<T>::difference_type);
 		template <typename T>
-		random_access_iterator_tag	operator-(const random_access_iterator_tag<T> &, typename random_access_iterator_tag<T>::difference_type);
+		random_access_iterator_tag<T>	operator-(const random_access_iterator_tag<T> &, typename random_access_iterator_tag<T>::difference_type);
 		template <typename T>
-		random_access_iterator_tag	operator+=(typename random_access_iterator_tag<T>::difference_type, typename random_access_iterator_tag<T> &);
+		random_access_iterator_tag<T>	operator+(typename random_access_iterator_tag<T>::difference_type, const random_access_iterator_tag<T> &);
 		template <typename T>
-		random_access_iterator_tag	operator-=(typename random_access_iterator_tag<T>::difference_type, typename random_access_iterator_tag<T> &);
+		random_access_iterator_tag<T>	operator-(typename random_access_iterator_tag<T>::difference_type, const random_access_iterator_tag<T> &);
 		template <typename T>
 		typename random_access_iterator_tag<T>::difference_type	operator-(const random_access_iterator_tag<T> &, const random_access_iterator_tag<T> &);
 }
 
-#include"iteator.tpp"
+#include"iterator.tpp"
 
-
+#endif
 
 // 	template <class T> 
 // 	class Riteratorv : public Iteratorv<T>
