@@ -74,28 +74,16 @@ namespace ft
 				return (const_iterator(&this->_vector[this->_size_fill]));
 			};
 			reverse_iterator rbegin(){
-				return(reverse_iterator(this->_vector + this->_size_fill -1));
+				return(reverse_iterator(&this->_vector[this->_size_fill]));
 			}
 			const_reverse_iterator rbegin() const{
-				return(const_reverse_iterator(this->_vector + this->_size_fill -1));
+				return(const_reverse_iterator(&this->_vector[this->_size_fill]));
 			};
 			reverse_iterator rend(){
-				return(reverse_iterator(this->_vector - 1));
+				return(reverse_iterator(&this->_vector[0]));
 			};
 			const_reverse_iterator rend() const {
-				return(const_reverse_iterator(this->_vector - 1));
-			};
-			const_iterator cbegin() const {
-				return (const_iterator(this->_vector));
-			};
-			const_iterator cend() const {
-				return (const_iterator(this->_vector + this->_size_fill));
-			};
-			const_reverse_iterator crbegin() const {
-				return(const_reverse_iterator(this->_vector));
-			};
-			const_reverse_iterator crend() const{
-				return (const_reverse_iterator(this->_vector + this->_size_fill));
+				return(const_reverse_iterator(&this->_vector[0]));
 			};
 			///////////////////////////////////////
 			//			Capacity:               //
@@ -126,26 +114,17 @@ namespace ft
 				return(this->_size_fill == 0);
 			};
 			void reserve (size_type n){
-				if (n < this->_size)
+				if (n <= this->_size)
 					return ;
+				std::cout << n << std::endl;
 				pointer rep = this->_alloc.allocate(n);
 				for(size_type i = 0; i <= this->_size_fill; i++){
 					rep[i] = this->_vector[i];
 				}
+				std::cout << "deal" << std::endl;
 				this->_alloc.deallocate(this->_vector, this->_size);
 				this->_size = n;
 				this->_vector = rep;
-			};
-			void shrink_to_fit(){
-				if (this->_size > this->_size_fill){
-					pointer rep = this->_alloc.allocate(this->_size_fill);
-					for (size_type i = 0; i <= this->_size_fill; i++) {
-						rep[i] = this->_vector[i];
-					}
-					this->_alloc.deallocate(this->_vector, this->_size);
-					this->_size = this->_size_fill;
-					this->_vector = rep;
-				}
 			};
 			///////////////////////////////////////
 			//			Element access:          //
@@ -207,13 +186,14 @@ namespace ft
 			iterator insert(iterator position, const value_type& val){
 					size_type i = 0;
 
-					for (iterator it = begin(); it + i != position && i < this->_size_fill; i++){};
+					while  (begin() != position)
+						i++;
+					pointer	ret = &this->_vector[i];
 					if (this->_size < this->_size_fill + 1)
 						reserve(this->_size_fill + 1);
-					for(size_type j = this->_size - 1; j > i; j--) {
-						this->_vector[j] = this->_vector[j - 1];
-					}
-					this->_vector[i] = val;
+					if (i != this->_size) 
+						std::copy(position, end(), ret);
+					this->_alloc.construct(this->_vector[i], val);
 					this->_size_fill++;
 					return (iterator(&this->_vector[i]));
 			};
@@ -260,8 +240,6 @@ namespace ft
 					this->_size = 0;
 				} 
 			};
-			//emplace
-			//emplace_back
 			///////////////////////////////////////
 			//			  Allocator:             //
 			///////////////////////////////////////

@@ -7,7 +7,7 @@ INCLUDE = includes/*
 OBJS		=$(SRCS:.cpp=.o)
 CC			=c++
 CPPFLAGS	=-std=c++98
-FLAGS		=-Wall -Werror -Wextra ${CPPFLAGS}
+FLAGS		=-g -Wall -Werror -Wextra ${CPPFLAGS}
 INCS		=.
 
 .cpp.o :

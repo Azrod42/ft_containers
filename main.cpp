@@ -4,30 +4,25 @@
 int main(void)
 {
 	{
-		ft::vector<int> tete;
+		ft::vector<int> tete(32);
 
 		tete.push_back(299);
-		tete.push_back(298);
-		tete.push_back(297);
-		tete.push_back(296);
-		tete.push_back(295);
+		// tete.push_back(298);
+		// tete.push_back(297);
+		// tete.push_back(296);
+		// tete.push_back(295);
 
 		for (size_t i = 0; i < tete.size(); i++)
 			std::cout << tete[i] << std::endl;
 		std::cout << "=========" << std::endl;
+		std::cout << tete.size() << std::endl;
 
-		tete.erase(tete.begin(), tete.begin()+4);
-		std::cout << tete.capacity() << std::endl;
-		tete.shrink_to_fit();
-		std::cout << tete.capacity() << std::endl;
-
-		for (size_t i = 0; i < tete.size(); i++)
-			std::cout << tete[0] << std::endl;
-
+		// for (size_t i = 0; i < tete.size(); i++)
+		// 	std::cout << tete[0] << std::endl;
 		std::cout << "=========" << std::endl;
 	}
 	{
-		std::vector<int> tete;
+		std::vector<int> tete(32);
 
 		tete.push_back(299);
 		tete.push_back(298);
@@ -38,15 +33,10 @@ int main(void)
 		for (size_t i = 0; i < tete.size(); i++)
 			std::cout << tete[i] << std::endl;
 		std::cout << "=========" << std::endl;
+		std::cout << tete.size() << std::endl;
 
-		tete.erase(tete.begin(), tete.begin()+4);
-		std::cout << tete.capacity() << std::endl;
-		tete.shrink_to_fit();
-		std::cout << tete.capacity() << std::endl;
-
-		for (size_t i = 0; i < tete.size(); i++)
-			std::cout << tete[i] << std::endl;
-
+		// for (size_t i = 0; i < tete.size(); i++)
+		// 	std::cout << tete[0] << std::endl;
 		std::cout << "=========" << std::endl;
 	}
 	// test.~vector();
