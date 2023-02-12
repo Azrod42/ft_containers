@@ -1,13 +1,14 @@
 #ifndef REVERSE_ITERATOR_HPP
 # define REVERSE_ITERATOR_HPP
 
-#include"ft_include.hpp"
+// #include"ft_include.hpp"
 
-namespace	ft {
+namespace	ft
+{
 	template <class Iterator>
 	class reverse_iterator{
 		private : 
-			iterator_type _iter;
+			iterator_type _rit;
 
 		public :
 			typedef Iterator										iterator_type;
@@ -24,6 +25,8 @@ namespace	ft {
 			template <class Iter> 
 			reverse_iterator (const reverse_iterator<Iter>& rev_it);
 
+			template <class Iter> 
+			reverse_iterator &operator=(const reverse_iterator<Iter>& rev_it);
 			iterator_type base() const;
 			reference operator*() const;
 			reverse_iterator operator+ (difference_type n) const;
