@@ -21,7 +21,7 @@ namespace ft
 			typedef ft::random_access_iterator_tag<const T> 		const_iterator;
 			typedef ft::reverse_iterator<iterator> 					reverse_iterator;
 			typedef ft::reverse_iterator<const_iterator> 			const_reverse_iterator;
-			typedef std::ptrdiff_t									difference_type;
+			typedef ptrdiff_t									difference_type;
 			typedef size_t											size_type;
 
 		private:
@@ -94,6 +94,12 @@ namespace ft
 			//			  Allocator:             //
 			///////////////////////////////////////
 			allocator_type get_allocator() const;
+			class InvalidArgument : public std::exception {
+			public: virtual const char *what() const throw() { return ("Vector::exception : Invalid argument.");}};
+
+			class OutOfRange : public std::exception {
+			public: virtual const char *what() const throw() { return ("Vector::exception : Out of range.");}};
+
 	};
 }
 
