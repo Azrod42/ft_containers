@@ -33,18 +33,18 @@ reverse_iterator<Iterator>&		reverse_iterator<Iterator>::operator=(const reverse
 };
 
 template <class Iterator>
-reverse_iterator<Iterator>::iterator_type 		reverse_iterator<Iterator>::base() const{
+typename reverse_iterator<Iterator>::iterator_type 		reverse_iterator<Iterator>::base() const{
 	return (this->_rit + 1);
 };
 
 template <class Iterator>
-reverse_iterator<Iterator>::reference reverse_iterator<Iterator>::operator*() const{
+typename reverse_iterator<Iterator>::reference reverse_iterator<Iterator>::operator*() const{
 	return (*this->_rit);
 };
 
 template <class Iterator>
 reverse_iterator<Iterator> reverse_iterator<Iterator>::operator+ (difference_type n) const{
-	this->_rit -= 1;
+	this->_rit -= n;
 	return (*this);	
 };
 
@@ -69,7 +69,7 @@ reverse_iterator<Iterator>& reverse_iterator<Iterator>::operator+= (difference_t
 
 template <class Iterator>
 reverse_iterator<Iterator> reverse_iterator<Iterator>::operator- (difference_type n) const{
-	this->_rit += 1;
+	this->_rit += n;
 	return (*this);	
 };
 
@@ -93,12 +93,12 @@ reverse_iterator<Iterator>& reverse_iterator<Iterator>::operator-= (difference_t
 };
 
 template <class Iterator>
-reverse_iterator<Iterator>::pointer reverse_iterator<Iterator>::operator->() const{
+typename reverse_iterator<Iterator>::pointer reverse_iterator<Iterator>::operator->() const{
 	return (this->_rit);
 };
 
 template <class Iterator>
-reverse_iterator<Iterator>::reference reverse_iterator<Iterator>::operator[] (difference_type n) const {
+typename reverse_iterator<Iterator>::reference reverse_iterator<Iterator>::operator[] (difference_type n) const {
 	this->_rit -= n;
 	return (*this);
 };
@@ -130,7 +130,7 @@ bool operator>= (const reverse_iterator<Iterator>& lhs, const reverse_iterator<I
 };
 template <class Iterator>
 typename reverse_iterator<Iterator>::difference_type operator- (const reverse_iterator<Iterator>& lhs, const reverse_iterator<Iterator>& rhs){
-	reverse_iterator<Iterator> temp
+	reverse_iterator<Iterator> temp;
 	if (lhs._rit > rhs._rit)
 		temp = lhs.base() - rhs.base();
 	else 

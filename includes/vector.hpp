@@ -4,23 +4,25 @@
 # include<iostream>
 # include<cmath>
 # include<cstdio>
-# include"iteratorv.hpp"
+# include"ft_include.hpp"
 
 namespace ft
 {
 	template <typename T, typename Alloc = std::allocator<T> >
 	class vector {
 		public:
-			typedef T*					pointer;
-			typedef T&					reference;
-			typedef const T&			const_reference;
-			typedef T					value_type;
-			typedef size_t				size_type;
-			typedef Alloc				allocator_type;	
-			typedef ft::Iteratorv<T> 	iterator;
-			typedef ft::Citeratorv<T> 	const_iterator;
-			typedef ft::Riteratorv<T> 	reverse_iterator;
-			typedef ft::CRiteratorv<T> 	const_reverse_iterator;
+			typedef T												value_type;
+			typedef Alloc											allocator_type;	
+			typedef T&												reference;
+			typedef const T&										const_reference;
+			typedef T*												pointer;
+			typedef const T*										const_pointer;
+			typedef ft::random_access_iterator_tag<T> 				iterator;
+			typedef ft::random_access_iterator_tag<const T> 		const_iterator;
+			typedef ft::reverse_iterator<T> 						reverse_iterator;
+			typedef ft::reverse_iterator<const T> 					const_reverse_iterator;
+			typedef std::ptrdiff_t									difference_type;
+			typedef size_t											size_type;
 
 		private:
 			pointer			_vector;
@@ -185,17 +187,22 @@ namespace ft
 			};
 			iterator insert(iterator position, const value_type& val){
 					size_type i = 0;
+					iterator	it = position;
 
-					while  (begin() != position)
-						i++;
-					pointer	ret = &this->_vector[i];
 					if (this->_size < this->_size_fill + 1)
-						reserve(this->_size_fill + 1);
-					if (i != this->_size) 
-						std::copy(position, end(), ret);
-					this->_alloc.construct(this->_vector[i], val);
-					this->_size_fill++;
-					return (iterator(&this->_vector[i]));
+						reserve(this->_size_fill + 1)
+					while (it != end())	
+						
+					// while  (begin() != position)
+					// 	i++;
+					// pointer	ret = &this->_vector[i];
+					// if (this->_size < this->_size_fill + 1)
+					// 	reserve(this->_size_fill + 1);
+					// if (i != this->_size) 
+					// 	std::copy(position, end(), ret);
+					// this->_alloc.construct(this->_vector[i], val);
+					// this->_size_fill++;
+					// return (iterator(&this->_vector[i]));
 			};
 			void insert (iterator position, size_type n, const value_type& val){
 				for(size_type i = 0; i < n; i++){

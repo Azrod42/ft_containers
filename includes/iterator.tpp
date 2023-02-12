@@ -31,7 +31,7 @@ random_access_iterator_tag<T>		&random_access_iterator_tag<T>::operator=(const r
 
 template <class T> 
 random_access_iterator_tag<T>		&random_access_iterator_tag<T>::operator++(){
-	his->ptr++
+	this->ptr++;
 	return (*this);
 }
 
@@ -144,7 +144,7 @@ template <typename T>
 typename random_access_iterator_tag<T>::difference_type		ft::operator-(const random_access_iterator_tag<T> &it1, const random_access_iterator_tag<T> &it2){
 	typename random_access_iterator_tag<T>::difference_type tmp;
 
-	if (it1.ptr > b.ptr)
+	if (it1.ptr > it2.ptr)
 		tmp = it1.ptr - it2.ptr;
 	else
 		tmp = it2.ptr - it1.ptr;
