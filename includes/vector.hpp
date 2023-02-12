@@ -202,6 +202,7 @@ namespace ft
 					insert(position, val);
 				}
 			};
+
 			template <class InputIterator>
 			void insert (iterator position, InputIterator first, InputIterator last){
 				while (first != last){
