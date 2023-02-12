@@ -77,42 +77,42 @@ vector<T, Alloc>::~vector(){
 
 template <typename T, class Alloc>
 typename vector<T, Alloc>::iterator					vector<T, Alloc>::begin(){
-	return (vector<T, Alloc>::iterator(this->_tab));
+	return (typename vector<T, Alloc>::iterator(this->_tab));
 };
 
 template <typename T, class Alloc>
 typename vector<T, Alloc>::const_iterator			vector<T, Alloc>::begin() const{
-	return (vector<T, Alloc>::const_iterator(this->_tab));
+	return (typename vector<T, Alloc>::const_iterator(this->_tab));
 };
 
 template <typename T, class Alloc>
 typename vector<T, Alloc>::iterator 				vector<T, Alloc>::end(){
-	return (vector<T, Alloc>::iterator(this->_tab + this->_size));
+	return (typename vector<T, Alloc>::iterator(this->_tab + this->_size));
 };
 
 template <typename T, class Alloc>
 typename vector<T, Alloc>::const_iterator			vector<T, Alloc>::end() const{
-	return (vector<T, Alloc>::const_iterator(this->_tab + this->_size));
+	return (typename vector<T, Alloc>::const_iterator(this->_tab + this->_size));
 };
 
 template <typename T, class Alloc>
 typename vector<T, Alloc>::reverse_iterator 		vector<T, Alloc>::rbegin(){
-	return (vector<T, Alloc>::reverse_iterator(this->_tab + this->_size));
+	return (typename vector<T, Alloc>::reverse_iterator(this->_tab + this->_size));
 };
 
 template <typename T, class Alloc>
 typename vector<T, Alloc>::const_reverse_iterator	vector<T, Alloc>::rbegin() const{
-	return (vector<T, Alloc>::const_reverse_iterator(this->_tab + this->_size));
+	return (typename vector<T, Alloc>::const_reverse_iterator(this->_tab + this->_size));
 };
 
 template <typename T, class Alloc>
 typename vector<T, Alloc>::reverse_iterator		vector<T, Alloc>::rend(){
-	return (vector<T, Alloc>::reverse_iterator(this->_tab));
+	return (typename vector<T, Alloc>::reverse_iterator(this->_tab));
 };
 
 template <typename T, class Alloc>
 typename vector<T, Alloc>::const_reverse_iterator	vector<T, Alloc>::rend() const {
-	return (vector<T, Alloc>::const_reverse_iterator(this->_tab));
+	return (typename vector<T, Alloc>::const_reverse_iterator(this->_tab));
 };
 
 template <typename T, class Alloc>
@@ -244,26 +244,8 @@ const typename  vector<T, Alloc>::value_type*	vector<T, Alloc>::data() const{
 	return (this->_tab);
 };
 
-// template <typename T, class Alloc>
-// template <class InputIterator>
-// void 		vector<T, Alloc>::assign (InputIterator first, InputIterator last){
-// 	difference_type toconv = last - first;
-// 	size_type n = (size_type)toconv;
-
-// 	T	*dup = new T[n];
-// 	for (size_type i = 0; i < n; i++)
-// 		dup[i] = *(first + i);	
-// 	this->_size = n;
-// 	if (this->_size_fill < this->_size)
-// 		this->_size_fill = this->_size;
-// 		this->_tab = this->_alloc.allocate(this->_size_fill);
-// 	for(size_type i = 0; i < this->_size; i++)
-// 		this->_alloc.construct(this->_tab + i, dup[i]);
-// 	delete[] dup;
-// };
-
 template <typename T, class Alloc>
-void		vector<T, Alloc>::assign (size_type n, const value_type& val){
+void		 vector<T, Alloc>::assign (size_type n, const value_type& val){
 	for(size_type i = 0; i < this->_size; i++)
 		this->_alloc.destroy(this->_tab + i);
 	this->_alloc.deallocate(this->_tab, this->_size);
@@ -274,6 +256,25 @@ void		vector<T, Alloc>::assign (size_type n, const value_type& val){
 	for(size_type i = 0; i < this->_size; i++)
 		this->_alloc.construct(this->_tab + i, val);
 };
+
+template <typename T, class Alloc>
+template <class InputIterator>
+void 		 vector<T, Alloc>::assign (InputIterator first, InputIterator last){
+	difference_type toconv = last - first;
+	size_type n = (size_type)toconv;
+
+	T	*dup = new T[n];
+	for (size_type i = 0; i < n; i++)
+		dup[i] = *(first + i);	
+	this->_size = n;
+	if (this->_size_fill < this->_size)
+		this->_size_fill = this->_size;
+		this->_tab = this->_alloc.allocate(this->_size_fill);
+	for(size_type i = 0; i < this->_size; i++)
+		this->_alloc.construct(this->_tab + i, dup[i]);
+	delete[] dup;
+};
+
 // void		push_back (const value_type& val);
 // void		pop_back();
 // iterator	insert(iterator position, const value_type& val);

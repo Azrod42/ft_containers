@@ -27,15 +27,22 @@ int main(void)
 		std::cout << tete.front() << std::endl;
 		std::cout << tete.back() << std::endl;
 		tete.data();
-		// ft::vector<int> teta(5);
-		// teta.assign(tete.begin(), tete.end());
-		// std::cout << "========" << std::endl;
-		// std::cout << teta[9] << std::endl;
-		// std::cout << teta[10] << std::endl;
-		// std::cout << teta.at(9) << std::endl;
-		// std::cout << teta.at(10) << std::endl;
-		// std::cout << teta.front() << std::endl;
-		// std::cout << teta.back() << std::endl;
+		ft::vector<int> teta(5);
+		teta.assign(tete.begin(), tete.end());
+		std::cout << "========" << std::endl;
+		std::cout << teta[9] << std::endl;
+		std::cout << teta[10] << std::endl;
+		std::cout << teta.at(9) << std::endl;
+		std::cout << teta.at(10) << std::endl;
+		std::cout << teta.front() << std::endl;
+		std::cout << teta.back() << std::endl;
+		teta.assign((size_t)32, (int)989);	
+		std::cout << teta[9] << std::endl;
+		std::cout << teta[10] << std::endl;
+		std::cout << teta.at(9) << std::endl;
+		std::cout << teta.at(10) << std::endl;
+		std::cout << teta.front() << std::endl;
+		std::cout << teta.back() << std::endl;
 		// for (size_t i = 0; i < tete.size(); i++)
 		// 	std::cout << tete[i] << std::endl;
 		std::cout << "======================" << std::endl;
@@ -64,25 +71,22 @@ int main(void)
 		std::cout << tete.front() << std::endl;
 		std::cout << tete.back() << std::endl;
 		tete.data();
-		// std::vector<int> teta(5);
-		// teta.assign(tete.begin(), tete.end());
-		// std::cout << "========" << std::endl;
-		// std::cout << teta[9] << std::endl;
-		// std::cout << teta[10] << std::endl;
-		// std::cout << teta.at(9) << std::endl;
-		// std::cout << teta.at(10) << std::endl;
-		// std::cout << teta.front() << std::endl;
-		// std::cout << teta.back() << std::endl;
-		// std::cout << "======================" << std::endl;
-	}
-	{
-		ft::vector<int> tete;
-		
-		tete.assign(32, 2);
-	}
-	{
-		std::vector<int> tete;
-		
-		tete.assign(32, 2);
+		std::vector<int> teta(5);
+		teta.assign(tete.begin(), tete.end());
+		std::cout << "========" << std::endl;
+		std::cout << teta[9] << std::endl;
+		std::cout << teta[10] << std::endl;
+		std::cout << teta.at(9) << std::endl;
+		std::cout << teta.at(10) << std::endl;
+		std::cout << teta.front() << std::endl;
+		std::cout << teta.back() << std::endl;
+		teta.assign(32, 989);	
+		std::cout << teta[9] << std::endl;
+		std::cout << teta[10] << std::endl;
+		std::cout << teta.at(9) << std::endl;
+		std::cout << teta.at(10) << std::endl;
+		std::cout << teta.front() << std::endl;
+		std::cout << teta.back() << std::endl;
+		std::cout << "======================" << std::endl;
 	}
 }
