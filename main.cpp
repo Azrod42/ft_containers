@@ -94,7 +94,7 @@ int main(void)
 		std::cout << "======================" << std::endl;
 	}
 	{
-		ft::vector<int> tete;
+		ft::vector<long> tete;
 
 		tete.push_back(30);
 		tete.push_back(31);

@@ -21,7 +21,7 @@ namespace ft
 			typedef ft::random_access_iterator_tag<const T> 		const_iterator;
 			typedef ft::reverse_iterator<iterator> 					reverse_iterator;
 			typedef ft::reverse_iterator<const_iterator> 			const_reverse_iterator;
-			typedef ptrdiff_t									difference_type;
+			typedef ptrdiff_t										difference_type;
 			typedef size_t											size_type;
 
 		private:
@@ -83,9 +83,9 @@ namespace ft
 			void		push_back (const value_type& val);
 			void		pop_back();
 			iterator	insert(iterator position, const value_type& val);
-			void		insert (iterator position, size_type n, vector<T, Alloc>::value_type const &val);
 			template <class InputIterator>
-			void		insert (iterator position, InputIterator first, InputIterator last);
+			void		insert(iterator position, InputIterator first, InputIterator last);
+			void		insert(iterator position, size_type n, value_type const &val);
 			iterator	erase (iterator position);
 			iterator	erase (iterator first, iterator last);
 			void		swap (vector& x);
