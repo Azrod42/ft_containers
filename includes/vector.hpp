@@ -83,7 +83,7 @@ namespace ft
 			void		push_back (const value_type& val);
 			void		pop_back();
 			iterator	insert(iterator position, const value_type& val);
-			void		insert (iterator position, size_type n, const value_type& val);
+			void		insert (iterator position, size_type n, vector<T, Alloc>::value_type const &val);
 			template <class InputIterator>
 			void		insert (iterator position, InputIterator first, InputIterator last);
 			iterator	erase (iterator position);
