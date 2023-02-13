@@ -43,6 +43,8 @@ int main(void)
 		std::cout << teta.at(10) << std::endl;
 		std::cout << teta.front() << std::endl;
 		std::cout << teta.back() << std::endl;
+		teta.push_back(3232);
+		std::cout << teta.back() << std::endl;
 		// for (size_t i = 0; i < tete.size(); i++)
 		// 	std::cout << tete[i] << std::endl;
 		std::cout << "======================" << std::endl;
@@ -87,6 +89,39 @@ int main(void)
 		std::cout << teta.at(10) << std::endl;
 		std::cout << teta.front() << std::endl;
 		std::cout << teta.back() << std::endl;
+		teta.push_back(3232);
+		std::cout << teta.back() << std::endl;
 		std::cout << "======================" << std::endl;
+	}
+	{
+		ft::vector<int> tete;
+
+		tete.push_back(30);
+		tete.push_back(31);
+		tete.push_back(32);
+		tete.push_back(33);
+		tete.push_back(34);
+		tete.push_back(35);
+		tete.pop_back();
+		tete.insert(tete.begin()+5, 10, 42);
+		for (size_t i = 0; i < tete.size(); i++)
+			std::cout << tete[i] << std::endl;
+		std::cout << tete.size() << " " << tete.capacity() << std::endl;
+		std::cout << "======================" << std::endl;
+	}
+	{
+		std::vector<int> tete;
+
+		tete.push_back(30);
+		tete.push_back(31);
+		tete.push_back(32);
+		tete.push_back(33);
+		tete.push_back(34);
+		tete.push_back(35);
+		tete.pop_back();
+		tete.insert(tete.begin()+5, 10, 42);
+		for (size_t i = 0; i < tete.size(); i++)
+			std::cout << tete[i] << std::endl;
+		std::cout << tete.size() << " " << tete.capacity() << std::endl;
 	}
 }
