@@ -103,7 +103,8 @@ int main(void)
 		tete.push_back(34);
 		tete.push_back(35);
 		tete.pop_back();
-		tete.insert(tete.begin()+5, 10, 42);
+		tete.insert(tete.begin()+5, 10, 32);
+		std::cout << "ici" << std::endl;
 		for (size_t i = 0; i < tete.size(); i++)
 			std::cout << tete[i] << std::endl;
 		std::cout << tete.size() << " " << tete.capacity() << std::endl;
@@ -119,7 +120,8 @@ int main(void)
 		tete.push_back(34);
 		tete.push_back(35);
 		tete.pop_back();
-		tete.insert(tete.begin()+5, 10, 42);
+		std::cout << "ici" << std::endl;
+		tete.insert(tete.begin()+5, 10, 32);
 		for (size_t i = 0; i < tete.size(); i++)
 			std::cout << tete[i] << std::endl;
 		std::cout << tete.size() << " " << tete.capacity() << std::endl;

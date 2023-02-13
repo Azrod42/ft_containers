@@ -61,12 +61,12 @@ T									&random_access_iterator_tag<T>::operator[](unsigned long i){
 }
 
 template <class T> 
-T									&random_access_iterator_tag<T>::operator*(){
+typename random_access_iterator_tag<T>::reference				random_access_iterator_tag<T>::operator*(){
 	return (*this->ptr);
 }
 
 template <class T> 
-T									*random_access_iterator_tag<T>::operator->(){
+typename random_access_iterator_tag<T>::pointer					random_access_iterator_tag<T>::operator->(){
 	return (this->ptr);
 }
 

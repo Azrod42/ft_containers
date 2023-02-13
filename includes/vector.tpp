@@ -321,13 +321,21 @@ typename vector<T, Alloc>::iterator	vector<T, Alloc>::insert(iterator position, 
 };
 
 template <typename T, class Alloc>
-void		vector<T, Alloc>::insert (iterator position, size_type n, const value_type& val){
+void		vector<T, Alloc>::insert (iterator position, size_type n, vector<T, Alloc>::value_type const &val){
 	for(size_type i = 0; i <= n; i++){
 		insert(position, val);
 	}
 };
+
+
+// template <typename T, class Alloc>
 // template <class InputIterator>
-// void		insert (iterator position, InputIterator first, InputIterator last);
+// void		vector<T, Alloc>::insert (iterator position, InputIterator first, InputIterator last){
+// 	while (first != last){
+// 		position = (insert(position, 32)) + 1;
+// 		first++;
+// 	} 
+// };
 // iterator	erase (iterator position);
 // iterator	erase (iterator first, iterator last);
 // void		swap (vector& x);

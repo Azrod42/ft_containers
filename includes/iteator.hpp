@@ -27,8 +27,8 @@ namespace ft
 			random_access_iterator_tag	operator++(int);
 			random_access_iterator_tag	operator--(int);
 			value_type					&operator[](unsigned long i);
-			value_type					&operator*();
-			value_type					*operator->();
+			reference					operator*();
+			pointer						operator->();
 	};
 		template <typename T>
 		bool		operator==(const random_access_iterator_tag<T> &it1, const random_access_iterator_tag<T> &it2);
