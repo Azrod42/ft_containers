@@ -21,8 +21,8 @@ namespace ft
 			typedef ft::random_access_iterator_tag<const T> 		const_iterator;
 			typedef ft::reverse_iterator<iterator> 					reverse_iterator;
 			typedef ft::reverse_iterator<const_iterator> 			const_reverse_iterator;
-			typedef ptrdiff_t										difference_type;
-			typedef size_t											size_type;
+			typedef std::ptrdiff_t										difference_type;
+			typedef std::size_t											size_type;
 
 		private:
 			size_type		_size;

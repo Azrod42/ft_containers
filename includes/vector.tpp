@@ -300,41 +300,91 @@ void		vector<T, Alloc>::pop_back(){
 
 template <typename T, class Alloc>
 typename vector<T, Alloc>::iterator	vector<T, Alloc>::insert(iterator position, const value_type& val){
-	iterator		it = begin();
-	size_type		i = -1;
-
+	size_type		size = this->_size;
+	difference_type pos = position - this->begin();
+	
 	T	*dup = new T[this->_size];
-	for (size_type i = 0; i < this->_size; i++)
+	for (size_type i = 0; i < this->_size; ++i)
 		dup[i] = this->_tab[i];	
-	for(size_type i = 0; i < this->_size; i++)
-		this->_alloc.destroy(this->_tab + i);
-	this->_alloc.deallocate(this->_tab, this->_size);
-	this->_tab = this->_alloc.allocate(++this->_size_fill);
-	while (++i + it != position)
-		this->_alloc.construct(this->_tab + i, dup[i]);
-	this->_alloc.construct(this->_tab + i, val);
-	i--;
-	this->_size += 1;
-	while (++i < this->_size)
-		this->_alloc.construct(this->_tab + i + 1, dup[i]);
-	return (position);
+	for (size_type i = 0; i < this->_size; ++i)
+		this->pop_back();
+	for (size_type i = 0; i < (size_t)pos; ++i)
+		this->push_back(dup[i]);
+	this->push_back(val);
+	std::cout << "merde" << (size_type)pos << " " << this->_size << std::endl;
+	for (size_type i = (size_type)pos; i < size; ++i)
+		this->push_back(dup[i]);
+	delete[] dup;
+	return (this->begin() + pos);
+
+	// iterator		it(this->_tab);
+
+	// T	*dup = new T[this->_size];
+	// for (size_type i = 0; i < this->_size; i++)
+	// 	dup[i] = this->_tab[i];	
+	// for(size_type i = 0; i < this->_size; i++)
+	// 	this->_alloc.destroy(this->_tab + i);
+	// this->_alloc.deallocate(this->_tab, this->_size);
+	// this->_tab = this->_alloc.allocate(this->_size_fill + 1);
+	// this->_size_fill += 1;
+	// size_type		i = 0;
+	// std::cout << begin() - position << " " << this->_size << " " << this->_size_fill << std::endl;
+	// while (i + it != position)
+	// {
+	// 	this->_alloc.construct(this->_tab + i, dup[i]);
+	// 	i++;
+	// }
+	// this->_alloc.construct(this->_tab + i, val);
+	// i--;
+	// this->_size += 1;
+	// while (++i < this->_size)
+	// 	this->_alloc.construct(this->_tab + i + 1, dup[i]);
+	// return (iterator(&this->_tab[i + 1]));
 };
 
-template <typename T, class Alloc>
-void		vector<T, Alloc>::insert (iterator position, size_type n, vector<T, Alloc>::value_type const &val){
-	for(size_type i = 0; i <= n; i++){
-		insert(position, val);
-	}
-};
+// template <typename T, class Alloc>
+// void vector<T, Alloc>::insert (typename vector<T, Alloc>::iterator position,typename  vector<T, Alloc>::size_type n,typename  vector<T, Alloc>::value_type const &val){
+// 	std::cout << this->_size_fill << " " << this->_size << std::endl;
+// 	difference_type dif =  
+	
+// 	T	*dup = new T[this->_size];
+// 	for (size_type i = 0; i < this->_size; ++i)
+// 		dup[i] = this->_tab[i];	
+// 	T	*dup2 = new T[this->_size];
+// 	for (size_type i = 0; i < this->_size; ++i)
+// 		dup2[i] = this->_tab[i];
+// 	// iterator		it(this->_tab);
+// 	// size_type j = 0;
+
+// 	// for (size_type i = 0; it + i != position; i++)
+// 	// 	j++;
+// 	// for(typename vector<T, Alloc>::size_type i = 0; i < n; i++){
+// 	// 	insert(begin() + j, val);
+// 	// }
+// };
 
 
 // template <typename T, class Alloc>
 // template <class InputIterator>
-// void		vector<T, Alloc>::insert (iterator position, InputIterator first, InputIterator last){
-// 	while (first != last){
-// 		position = (insert(position, 32)) + 1;
-// 		first++;
-// 	} 
+// void		vector<T, Alloc>::insert (vector<T, Alloc>::iterator position, InputIterator first, InputIterator last){
+// 	std::cout << this->_size_fill << " " << this->_size << std::endl;
+
+// 	difference_type dif = last - first;
+// 	size_type diff = (size_type)dif; 
+// 	difference_type pos = position - this->begin();
+	
+// 	T	*dup = new T[this->_size];
+// 	for (size_type i = 0; i < this->_size; ++i)
+// 		dup[i] = this->_tab[i];	
+// 	T	*dup2 = new T[this->_size];
+// 	for (size_type i = 0; i < diff; ++i)
+// 		dup2[i] = *(first + i);
+// 	for (size_type i = 0; i < this->_size; ++i)
+// 		this->pop_back();
+// 	for (size_type i = 0; i < (size_t)pos; ++i)
+// 		this->push_back(dup2[i]);
+// 	for (size_type i = (size_type)pos; i < this->_size; ++i)
+// 		this->push_back(dup[i]);
 // };
 // iterator	erase (iterator position);
 // iterator	erase (iterator first, iterator last);
