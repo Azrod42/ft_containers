@@ -96,8 +96,7 @@ int main(void)
 	{
 		ft::vector<int> tete;
 
-		tete.insert(tete.begin(), 200);
-		tete.insert(tete.begin(), 200);
+		tete.insert(tete.begin()+2, 32, 42);
 		// tete.insert(tete.begin()+2, 200);
 		for (size_t i = 0; i < tete.size(); i++)
 			std::cout << tete[i] << std::endl;
@@ -107,8 +106,7 @@ int main(void)
 	{
 		std::vector<int> tete;
 
-		tete.insert(tete.begin(), 200);
-		tete.insert(tete.begin(), 200);
+		tete.insert(tete.begin()+2, 32, 42);
 		// tete.insert(tete.begin()+5, 10000, 32);
 		for (size_t i = 0; i < tete.size(); i++)
 			std::cout << tete[i] << std::endl;

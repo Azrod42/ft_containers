@@ -317,26 +317,30 @@ typename vector<T, Alloc>::iterator	vector<T, Alloc>::insert(iterator position, 
 	return (this->begin() + pos);
 };
 
-// template <typename T, class Alloc>
-// void vector<T, Alloc>::insert (typename vector<T, Alloc>::iterator position,typename  vector<T, Alloc>::size_type n,typename  vector<T, Alloc>::value_type const &val){
-// 	std::cout << this->_size_fill << " " << this->_size << std::endl;
-// 	difference_type dif =  
+template <typename T, class Alloc>
+void vector<T, Alloc>::insert (typename vector<T, Alloc>::iterator position,typename  vector<T, Alloc>::size_type n,typename  vector<T, Alloc>::value_type const &val){
+	std::cout << this->_size_fill << " " << this->_size << std::endl;
+	while (first != last){
+		position = (insert(position, *first)) + 1;
+		++first;
+	} 
+	// difference_type dif =  
 	
-// 	T	*dup = new T[this->_size];
-// 	for (size_type i = 0; i < this->_size; ++i)
-// 		dup[i] = this->_tab[i];	
-// 	T	*dup2 = new T[this->_size];
-// 	for (size_type i = 0; i < this->_size; ++i)
-// 		dup2[i] = this->_tab[i];
-// 	// iterator		it(this->_tab);
-// 	// size_type j = 0;
+	// T	*dup = new T[this->_size];
+	// for (size_type i = 0; i < this->_size; ++i)
+	// 	dup[i] = this->_tab[i];	
+	// T	*dup2 = new T[this->_size];
+	// for (size_type i = 0; i < this->_size; ++i)
+	// 	dup2[i] = this->_tab[i];
+	// iterator		it(this->_tab);
+	// size_type j = 0;
 
-// 	// for (size_type i = 0; it + i != position; i++)
-// 	// 	j++;
-// 	// for(typename vector<T, Alloc>::size_type i = 0; i < n; i++){
-// 	// 	insert(begin() + j, val);
-// 	// }
-// };
+	// for (size_type i = 0; it + i != position; i++)
+	// 	j++;
+	// for(typename vector<T, Alloc>::size_type i = 0; i < n; i++){
+	// 	insert(begin() + j, val);
+	// }
+};
 
 
 // template <typename T, class Alloc>
