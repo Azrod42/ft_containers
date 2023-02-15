@@ -4,112 +4,79 @@
 int main(void)
 {
 	{
-		ft::vector<int> tete(2);
+		ft::vector<int> vct(7);
+		ft::vector<int> vct_two(4);
+		ft::vector<int> vct_three;
+		ft::vector<int> vct_four;
 
-		std::cout << tete.size() << std::endl;
-		std::cout << tete.capacity() << std::endl;
-		tete.reserve(10);
-		std::cout << tete.size() << std::endl;
-		std::cout << tete.capacity() << std::endl;
-		tete.resize(13, 32);
-		std::cout << tete.size() << std::endl;
-		std::cout << tete.capacity() << std::endl;
-		ft::vector<int>::iterator it = tete.begin() + 5;
-		std::cout << *it << std::endl;
-		std::cout << "========" << std::endl;
-		tete[9] = 31;
-		tete[0] = 42;
-		tete[12] = 900;
-		std::cout << tete[9] << std::endl;
-		std::cout << tete[10] << std::endl;
-		std::cout << tete.at(9) << std::endl;
-		std::cout << tete.at(10) << std::endl;
-		std::cout << tete.front() << std::endl;
-		std::cout << tete.back() << std::endl;
-		tete.data();
-		ft::vector<int> teta(5);
-		teta.assign(tete.begin(), tete.end());
-		std::cout << "========" << std::endl;
-		std::cout << teta[9] << std::endl;
-		std::cout << teta[10] << std::endl;
-		std::cout << teta.at(9) << std::endl;
-		std::cout << teta.at(10) << std::endl;
-		std::cout << teta.front() << std::endl;
-		std::cout << teta.back() << std::endl;
-		teta.assign((size_t)32, (int)989);	
-		std::cout << teta[9] << std::endl;
-		std::cout << teta[10] << std::endl;
-		std::cout << teta.at(9) << std::endl;
-		std::cout << teta.at(10) << std::endl;
-		std::cout << teta.front() << std::endl;
-		std::cout << teta.back() << std::endl;
-		teta.push_back(3232);
-		std::cout << teta.back() << std::endl;
-		// for (size_t i = 0; i < tete.size(); i++)
-		// 	std::cout << tete[i] << std::endl;
+		for (unsigned long int i = 0; i < vct.size(); ++i)
+			vct[i] = (vct.size() - i) * 3;
+		for (unsigned long int i = 0; i < vct_two.size(); ++i)
+			vct_two[i] = (vct_two.size() - i) * 5;
+		std::cout << "vct : "<< vct.size() << " " << vct.capacity() << std::endl;
+		std::cout << "vct_two : "<< vct_two.size() << " " << vct_two.capacity() << std::endl;
+
+		vct_three.assign(vct.begin(), vct.end());
+		vct.assign(vct_two.begin(), vct_two.end());
+		vct_two.assign(2, 42);
+		vct_four.assign(4, 21);
+
+
+		std::cout << "\t### After assign(): ###" << std::endl;
+
+		std::cout << "vct : "<< vct.size() << " " << vct.capacity() << std::endl;
+		std::cout << "vct_two : "<< vct_two.size() << " " << vct_two.capacity() << std::endl;
+		std::cout << "vct_three : "<< vct_three.size() << " " << vct_three.capacity() << std::endl;
+		std::cout << "vct_four : "<< vct_four.size() << " " << vct_four.capacity() << std::endl;
+
+		vct_four.assign(6, 84);
+		std::cout << "vct_four : "<< vct_four.size() << " " << vct_four.capacity() << std::endl;
+
+		std::cout << "\t### assign() on enough capacity and low size: ###" << std::endl;
+
+		vct.assign(5, 53);
+		vct_two.assign(vct_three.begin(), vct_three.begin() + 3);
+
+		std::cout << "vct : "<< vct.size() << " " << vct.capacity() << std::endl;
+		std::cout << "vct_two : "<< vct_two.size() << " " << vct_two.capacity() << std::endl;
 		std::cout << "======================" << std::endl;
 	}
 	{
-		std::vector<int> tete(2);
+		std::vector<int> vct(7);
+		std::vector<int> vct_two(4);
+		std::vector<int> vct_three;
+		std::vector<int> vct_four;
 
-		std::cout << tete.size() << std::endl;
-		std::cout << tete.capacity() << std::endl;
-		tete.reserve(10);
-		std::cout << tete.size() << std::endl;
-		std::cout << tete.capacity() << std::endl;
-		tete.resize(13, 32);
-		std::cout << tete.size() << std::endl;
-		std::cout << tete.capacity() << std::endl;
-		std::vector<int>::iterator it = tete.begin() + 5;
-		std::cout << *it << std::endl;
-		std::cout << "========" << std::endl;
-		tete[9] = 31;
-		tete[0] = 42;
-		tete[12] = 900;
-		std::cout << tete[9] << std::endl;
-		std::cout << tete[10] << std::endl;
-		std::cout << tete.at(9) << std::endl;
-		std::cout << tete.at(10) << std::endl;
-		std::cout << tete.front() << std::endl;
-		std::cout << tete.back() << std::endl;
-		tete.data();
-		std::vector<int> teta(5);
-		teta.assign(tete.begin(), tete.end());
-		std::cout << "========" << std::endl;
-		std::cout << teta[9] << std::endl;
-		std::cout << teta[10] << std::endl;
-		std::cout << teta.at(9) << std::endl;
-		std::cout << teta.at(10) << std::endl;
-		std::cout << teta.front() << std::endl;
-		std::cout << teta.back() << std::endl;
-		teta.assign(32, 989);	
-		std::cout << teta[9] << std::endl;
-		std::cout << teta[10] << std::endl;
-		std::cout << teta.at(9) << std::endl;
-		std::cout << teta.at(10) << std::endl;
-		std::cout << teta.front() << std::endl;
-		std::cout << teta.back() << std::endl;
-		teta.push_back(3232);
-		std::cout << teta.back() << std::endl;
-		std::cout << "===========u---u===========" << std::endl;
-	}
-	{
-		ft::vector<int> tete;
+		for (unsigned long int i = 0; i < vct.size(); ++i)
+			vct[i] = (vct.size() - i) * 3;
+		for (unsigned long int i = 0; i < vct_two.size(); ++i)
+			vct_two[i] = (vct_two.size() - i) * 5;
+		std::cout << "vct : "<< vct.size() << " " << vct.capacity() << std::endl;
+		std::cout << "vct_two : "<< vct_two.size() << " " << vct_two.capacity() << std::endl;
 
-		tete.insert(tete.begin()+2, 32, 42);
-		// tete.insert(tete.begin()+2, 200);
-		for (size_t i = 0; i < tete.size(); i++)
-			std::cout << tete[i] << std::endl;
-		std::cout << tete.size() << " " << tete.capacity() << std::endl;
+		vct_three.assign(vct.begin(), vct.end());
+		vct.assign(vct_two.begin(), vct_two.end());
+		vct_two.assign(2, 42);
+		vct_four.assign(4, 21);
+
+
+		std::cout << "\t### After assign(): ###" << std::endl;
+
+		std::cout << "vct : "<< vct.size() << " " << vct.capacity() << std::endl;
+		std::cout << "vct_two : "<< vct_two.size() << " " << vct_two.capacity() << std::endl;
+		std::cout << "vct_three : "<< vct_three.size() << " " << vct_three.capacity() << std::endl;
+		std::cout << "vct_four : "<< vct_four.size() << " " << vct_four.capacity() << std::endl;
+
+		vct_four.assign(6, 84);
+		std::cout << "vct_four : "<< vct_four.size() << " " << vct_four.capacity() << std::endl;
+
+		std::cout << "\t### assign() on enough capacity and low size: ###" << std::endl;
+
+		vct.assign(5, 53);
+		vct_two.assign(vct_three.begin(), vct_three.begin() + 3);
+
+		std::cout << "vct : "<< vct.size() << " " << vct.capacity() << std::endl;
+		std::cout << "vct_two : "<< vct_two.size() << " " << vct_two.capacity() << std::endl;
 		std::cout << "======================" << std::endl;
-	}
-	{
-		std::vector<int> tete;
-
-		tete.insert(tete.begin()+2, 32, 42);
-		// tete.insert(tete.begin()+5, 10000, 32);
-		for (size_t i = 0; i < tete.size(); i++)
-			std::cout << tete[i] << std::endl;
-		std::cout << tete.size() << " " << tete.capacity() << std::endl;
 	}
 }

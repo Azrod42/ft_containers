@@ -21,8 +21,8 @@ namespace ft
 			typedef ft::random_access_iterator_tag<const T> 		const_iterator;
 			typedef ft::reverse_iterator<iterator> 					reverse_iterator;
 			typedef ft::reverse_iterator<const_iterator> 			const_reverse_iterator;
-			typedef std::ptrdiff_t										difference_type;
-			typedef std::size_t											size_type;
+			typedef std::ptrdiff_t									difference_type;
+			typedef std::size_t										size_type;
 
 		private:
 			size_type		_size;
@@ -100,6 +100,10 @@ namespace ft
 			class OutOfRange : public std::exception {
 			public: virtual const char *what() const throw() { return ("Vector::exception : Out of range.");}};
 
+	};
+	template <typename T, class Alloc>
+	void swap(vector<T, Alloc> &one, vector<T, Alloc> &two){
+		one.swap(two);
 	};
 }
 
