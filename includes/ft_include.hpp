@@ -5,5 +5,6 @@
 # include"iteator.hpp"
 # include"Iterator_traits.hpp"
 # include"reverse_iterator.hpp"
+# include"ft_algor.hpp"
 
 #endif

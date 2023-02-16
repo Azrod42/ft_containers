@@ -41,7 +41,7 @@ namespace ft
 	};
 	template <class T1, class T2>
 	bool operator<  (const pair<T1,T2>& lhs, const pair<T1,T2>& rhs){
-		return ((lsh.f < rhs.f || (!(lsh.f < rhs.f) && lsh.s < rhs.s)) ? true : false)
+		return ((lhs.f < rhs.f || (!(lhs.f < rhs.f) && lhs.s < rhs.s)) ? true : false);
 	};
 	template <class T1, class T2>
 	bool operator<= (const pair<T1,T2>& lhs, const pair<T1,T2>& rhs){
@@ -63,8 +63,8 @@ namespace ft
 	struct integral_constant {
 		static const bool value = v;
 		typedef T							value_type;
-		typedef std:integral_constant<T,v>	type;
-		constexpr operator T() { return value; }
+		typedef integral_constant<T,v>	type;
+		operator T() { return value; }
 	};
 	template <class T> struct is_integral : public ft::integral_constant<T, false> {};
 	template <> struct is_integral<bool> : public ft::integral_constant<bool, true> {};
@@ -84,5 +84,20 @@ namespace ft
 	template <> struct is_integral<unsigned long long int> : public ft::integral_constant<bool, true> {};
 	typedef integral_constant<bool,true> true_type;
 
+	template <bool Cond, class T, class F>
+	struct conditional {
+		typedef F type;
+	};
+	template <class T, class F>
+	struct conditional<true, T, F> {
+		typedef T type;
+	};
+	template<bool Cond, class T = void>
+	struct enable_if {};
+
+	template<class T>
+	struct enable_if<true, T> {
+		typedef T type;
+	};
 };
 #endif

@@ -77,7 +77,7 @@ namespace ft
 			//			  Modifiers:             //
 			///////////////////////////////////////
 			template <class InputIterator>
-			void 		assign (InputIterator first, InputIterator last);
+			void 		assign (InputIterator first, InputIterator last, typename enable_if<!is_integral<InputIterator>::value>::type* = -1);
 			void		assign (size_type n, const value_type& val);
 			void		push_back (const value_type& val);
 			void		pop_back();
@@ -109,8 +109,8 @@ namespace ft
 	bool	operator==(const ft::vector<T, Alloc>& lhs, const ft::vector<T, Alloc>& rhs){
 		if (lhs.size() != rhs.size())
 			return (false);
-		typename ft::vector<T>::const_iterator it1 lhs.begin();
-		typename ft::vector<T>::const_iterator it2 lhs.begin();
+		typename ft::vector<T>::const_iterator it1 = lhs.begin();
+		typename ft::vector<T>::const_iterator it2 = lhs.begin();
 		
 		while (it1 != lhs.end())
 		{
@@ -124,13 +124,24 @@ namespace ft
 
 	template <typename T, class Alloc>
 	bool	operator!=(const ft::vector<T, Alloc>& lhs, const ft::vector<T, Alloc>& rhs){
-		return (lhs == rhs ? fasle : true);
+		return (lhs == rhs ? false : true);
 	};
 
 	template <typename T, class Alloc>
 	bool	operator<(const ft::vector<T, Alloc>& lhs, const ft::vector<T, Alloc>& rhs){
 		
 	};
+	template <class InputIterator1, class InputIterator2, class Comp>
+  	bool lexicographical_compare (InputIterator1 first1, InputIterator1 last1,InputIterator2 first2, InputIterator2 last2, Comp comp)
+	{
+		while ((first1 != last1) && (first2 != last2)) {
+			if (comp(*first1, *first2)) return (true);
+			if (com(*first2, *first1)) return (false);
+			first1++
+			first2++;
+		}
+		return ((first1 == last1) && (first2 != last2));
+	}
 }
 
 #include"vector.tpp"
