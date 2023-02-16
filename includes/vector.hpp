@@ -10,7 +10,6 @@ namespace ft
 {
 	template <typename T, class Alloc = std::allocator<T> >
 	class vector {
-		public:
 			typedef T												value_type;
 			typedef Alloc											allocator_type;	
 			typedef typename allocator_type::reference				reference;
@@ -104,6 +103,33 @@ namespace ft
 	template <typename T, class Alloc>
 	void swap(vector<T, Alloc> &one, vector<T, Alloc> &two){
 		one.swap(two);
+	};
+
+	template <typename T, class Alloc>
+	bool	operator==(const ft::vector<T, Alloc>& lhs, const ft::vector<T, Alloc>& rhs){
+		if (lhs.size() != rhs.size())
+			return (false);
+		typename ft::vector<T>::const_iterator it1 lhs.begin();
+		typename ft::vector<T>::const_iterator it2 lhs.begin();
+		
+		while (it1 != lhs.end())
+		{
+			if(it2 == rhs.end() || *it1 != *it2)
+				return (false);
+				it1++;
+				it2++;
+		}
+		return (true);
+	};
+
+	template <typename T, class Alloc>
+	bool	operator!=(const ft::vector<T, Alloc>& lhs, const ft::vector<T, Alloc>& rhs){
+		return (lhs == rhs ? fasle : true);
+	};
+
+	template <typename T, class Alloc>
+	bool	operator<(const ft::vector<T, Alloc>& lhs, const ft::vector<T, Alloc>& rhs){
+		
 	};
 }
 

@@ -3,7 +3,8 @@
 
 #include"ft_include.hpp"
 
-namespace	ft {
+namespace	ft
+{
 	template <class Iterator>
 	class iterator_traits {
 		typedef typename Iterator::difference_type		difference_type;

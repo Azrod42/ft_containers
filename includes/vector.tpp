@@ -259,7 +259,7 @@ void		 vector<T, Alloc>::assign (size_type n, const value_type& val){
 
 template <typename T, class Alloc>
 template <class InputIterator>
-void 		 vector<T, Alloc>::assign (InputIterator first, InputIterator last){
+void 		 vector<T, Alloc>::assign (InputIterator first, InputIterator last, typename enable_if<!is_integral<InputIterator>::value>::type* = 0) : _allocator(Alloc){
 	difference_type toconv = last - first;
 	size_type n = (size_type)toconv;
 
