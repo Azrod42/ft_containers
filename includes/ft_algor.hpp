@@ -55,5 +55,20 @@ namespace ft
 	bool operator>= (const pair<T1,T2>& lhs, const pair<T1,T2>& rhs){
 		return (lhs < rhs ? false : true);
 	};
+	template <class T1, class T2>
+	pair<T1,T2> make_pair (T1 x, T2 y){
+		return(pair<T1,T2>(x, y));
+	};
+	template <class T, bool v>
+	struct integral_constant {
+		static const bool value = v;
+		typedef T							value_type;
+		typedef std:integral_constant<T,v>	type;
+		constexpr operator T() { return value; }
+	};
+	template <class T> struct is_integral : public ft::is_integral<T, false> {};
+	template <> struct is_integral<bool> : public ft::is_integral<bool, true> {};
+	typedef integral_constant<bool,true> true_type;
+
 };
 #endif
