@@ -1,9 +1,13 @@
 #ifndef VECTOR_HPP
 # define VECTOR_HPP
 
-# include<iostream>
-# include<cmath>
-# include<cstdio>
+# include <iostream>
+# include <cstdlib>
+# include <string>
+# include <stdexcept>
+# include <memory>
+# include <algorithm>
+# include <cstddef>
 # include"ft_include.hpp"
 
 namespace ft
@@ -36,7 +40,7 @@ namespace ft
 			explicit vector (const allocator_type& alloc = allocator_type());
 			explicit vector (size_type n, const value_type& val = value_type(), const allocator_type& alloc = allocator_type()); 
 			template <class InputIterator>
-			vector (InputIterator first, InputIterator last, const allocator_type& alloc = allocator_type());
+			vector (InputIterator first, InputIterator last, const allocator_type& alloc = allocator_type(), typename ft::enable_if<!ft::is_integral<InputIterator>::value>::type* = 0);
 			vector (const vector& x);
 			vector &operator=(const vector &copy);
 			~vector();
@@ -77,13 +81,13 @@ namespace ft
 			//			  Modifiers:             //
 			///////////////////////////////////////
 			template <class InputIterator>
-			void 		assign (InputIterator first, InputIterator last, typename enable_if<!is_integral<InputIterator>::value>::type* = -1);
+			void 		assign (InputIterator first, InputIterator last, typename ft::enable_if<!ft::is_integral<InputIterator>::value>::type* = 0);
 			void		assign (size_type n, const value_type& val);
 			void		push_back (const value_type& val);
 			void		pop_back();
 			iterator	insert(iterator position, const value_type& val);
 			template <class InputIterator>
-			void		insert(iterator position, InputIterator first, InputIterator last);
+			void		insert(iterator position, InputIterator first, InputIterator last, typename ft::enable_if<!ft::is_integral<InputIterator>::value>::type* = 0);
 			void		insert(iterator position, size_type n, value_type const &val);
 			iterator	erase (iterator position);
 			iterator	erase (iterator first, iterator last);
@@ -125,22 +129,26 @@ namespace ft
 	template <typename T, class Alloc>
 	bool	operator!=(const ft::vector<T, Alloc>& lhs, const ft::vector<T, Alloc>& rhs){
 		return (lhs == rhs ? false : true);
-	};
-
-	template <typename T, class Alloc>
-	bool	operator<(const ft::vector<T, Alloc>& lhs, const ft::vector<T, Alloc>& rhs){
+	}
+	
+	template< class T, class Alloc >
+	bool operator<( const vector<T,Alloc> &lhs, const vector<T,Alloc> &rhs ){
+		return ft::lexicographical_compare(lhs.begin(), lhs.end(), rhs.begin(), rhs.end());
+	}
 		
-	};
-	template <class InputIterator1, class InputIterator2, class Comp>
-  	bool lexicographical_compare (InputIterator1 first1, InputIterator1 last1,InputIterator2 first2, InputIterator2 last2, Comp comp)
-	{
-		while ((first1 != last1) && (first2 != last2)) {
-			if (comp(*first1, *first2)) return (true);
-			if (com(*first2, *first1)) return (false);
-			first1++
-			first2++;
-		}
-		return ((first1 == last1) && (first2 != last2));
+	template< class T, class Alloc >
+	bool operator<=( const vector<T,Alloc> &lhs, const vector<T,Alloc> &rhs ){
+		return (lhs > rhs ? false : true);
+	}
+		
+	template< class T, class Alloc >
+	bool operator>( const vector<T,Alloc> &lhs, const vector<T,Alloc> &rhs ){
+		return (rhs < lhs ? true : false);
+	}
+
+	template< class T, class Alloc >
+	bool operator>=( const vector<T,Alloc> &lhs, const vector<T,Alloc> &rhs ){
+		return (lhs < rhs ? false : true);
 	}
 }
 

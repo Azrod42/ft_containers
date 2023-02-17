@@ -27,7 +27,7 @@ vector<T, Alloc>::vector (size_type n, const value_type& val, const allocator_ty
 
 template <typename T, class Alloc>
 template <class InputIterator>
-vector<T, Alloc>::vector (InputIterator first, InputIterator last, const allocator_type& alloc)
+vector<T, Alloc>::vector (InputIterator first, InputIterator last, const allocator_type& alloc, typename ft::enable_if<!ft::is_integral<InputIterator>::value>::type*)
 : _size(0), _size_fill(0), _tab(NULL), _alloc(alloc){
 	difference_type toconv = last - first;
 	size_type n = (size_type)toconv;	
@@ -259,7 +259,7 @@ void		 vector<T, Alloc>::assign (size_type n, const value_type& val){
 
 template <typename T, class Alloc>
 template <class InputIterator>
-void 		 vector<T, Alloc>::assign (InputIterator first, InputIterator last, typename enable_if<!is_integral<InputIterator>::value>::type* = -1) {
+void 		 vector<T, Alloc>::assign (InputIterator first, InputIterator last, typename ft::enable_if<!ft::is_integral<InputIterator>::value>::type*) {
 	difference_type toconv = last - first;
 	size_type n = (size_type)toconv;
 
@@ -340,7 +340,7 @@ void vector<T, Alloc>::insert (typename vector<T, Alloc>::iterator position,size
 
 template <typename T, class Alloc>
 template <class InputIterator>
-void		vector<T, Alloc>::insert (vector<T, Alloc>::iterator position, InputIterator first, InputIterator last){//, typename ft::enable_if<!ft::is_integral<InputIterator>::value>::type*){
+void		vector<T, Alloc>::insert (vector<T, Alloc>::iterator position, InputIterator first, InputIterator last, typename ft::enable_if<!ft::is_integral<InputIterator>::value>::type*){//, typename ft::enable_if<!ft::is_integral<InputIterator>::value>::type*){
 	size_type 		size = this->_size;
 	difference_type pos = position - this->begin();
 	difference_type	size_to_copy = last - first; 
