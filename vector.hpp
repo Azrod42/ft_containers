@@ -1,5 +1,5 @@
-#ifndef VECTOR_HPP
-# define VECTOR_HPP
+#ifndef VECTOR_HPP_
+# define VECTOR_HPP_
 
 # include <iostream>
 # include <cstdlib>
@@ -14,6 +14,7 @@ namespace ft
 {
 	template <typename T, class Alloc = std::allocator<T> >
 	class vector {
+		public:
 			typedef T												value_type;
 			typedef Alloc											allocator_type;	
 			typedef typename allocator_type::reference				reference;

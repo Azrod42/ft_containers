@@ -24,6 +24,13 @@ ${NAME}: flag_use ${OBJS}
 	${_PRINTART1}
 	${_USAGE}
 
+diff: flag_use ${OBJS}
+	@${CC} ${FLAGS} -D TESTED_NAMESPACE=std ${OBJS} -o diff.std
+	@${CC} ${FLAGS} -D TESTED_NAMESPACE=ft ${OBJS} -o diff.ft
+	./diff.std > diff.std1
+	./diff.ft > diff.ft1
+	diff diff.ft1 diff.std1
+
 clean:
 	${_STATUS3}
 	@rm -rf *.o
@@ -31,7 +38,7 @@ clean:
 
 fclean: clean
 	${_STATUS5}
-	@rm -rf $(NAME)
+	@rm -rf $(NAME) diff.ft diff.std diff.ft1 diff.std1
 	${_DONE}
 
 norm:
@@ -40,7 +47,7 @@ norm:
 
 git_add:
 	${_STATUS7}	
-	git add ${SRCS} ${INCLUDE} Makefile note
+	git add ${SRCS} ${INCLUDE} Makefile
 	${_DONE}
 	@git status | grep modif
 
@@ -58,6 +65,8 @@ re: fclean all
 
 ree: fclean all
 	@./${NAME}
+
+dif: fclean diff
 
 reee:
 	@./${NAME}
