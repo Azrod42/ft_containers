@@ -239,6 +239,7 @@ int main(void){
 	printSize(vct3);
 }
 {
+
 	const int size = 5;
 	TESTED_NAMESPACE::vector<TESTED_TYPE> vct(size);
 	TESTED_NAMESPACE::vector<TESTED_TYPE>::iterator it = vct.begin();
