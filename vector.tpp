@@ -29,15 +29,20 @@ template <typename T, class Alloc>
 template <class InputIterator>
 vector<T, Alloc>::vector (InputIterator first, InputIterator last, const allocator_type& alloc, typename ft::enable_if<!ft::is_integral<InputIterator>::value>::type*)
 : _size(0), _size_fill(0), _tab(NULL), _alloc(alloc){
-	difference_type toconv = last - first;
-	size_type n = (size_type)toconv;	
+	// difference_type toconv = last - first;
+	size_type n = 0;
+	InputIterator first2 = first;
+	while (first != last){
+		first++;
+		n++;
+	}
 
 	if (n > 0){
 		this->_size = n;
 		this->_size_fill = n;
 		this->_tab = this->_alloc.allocate(n);
-		for(size_type i = 0; i < this->_size; i++)
-			this->_alloc.construct(this->_tab + i, *(first + i));
+		for(size_type i = 0; i < this->_size; i++, first2++)
+			this->_alloc.construct(this->_tab + i, *(first2));
 	}
 	else{
 		this->_size = 0;
@@ -203,14 +208,14 @@ typename vector<T, Alloc>::const_reference 	vector<T, Alloc>::operator[] (size_t
 template <typename T, class Alloc>
 typename vector<T, Alloc>::reference 			vector<T, Alloc>::at (size_type n){
 	if (n < 0 || n >= this->_size)
-		throw OutOfRange();
+		throw std::out_of_range("exep");
 	return (*(this->_tab + n));
 };
 
 template <typename T, class Alloc>
 typename vector<T, Alloc>::const_reference 	vector<T, Alloc>::at (size_type n) const{
 	if (n < 0 || n >= this->_size)
-		throw OutOfRange();
+		throw std::out_of_range("exep");
 	return (*(this->_tab + n));
 };
 
@@ -260,12 +265,16 @@ void		 vector<T, Alloc>::assign (size_type n, const value_type& val){
 template <typename T, class Alloc>
 template <class InputIterator>
 void 		 vector<T, Alloc>::assign (InputIterator first, InputIterator last, typename ft::enable_if<!ft::is_integral<InputIterator>::value>::type*) {
-	difference_type toconv = last - first;
-	size_type n = (size_type)toconv;
+	InputIterator first2 = first;
+	size_type n = 0;
+	while(first2 != last){
+		first2++;
+		n++;
+	} 
 
 	T	*dup = new T[n];
-	for (size_type i = 0; i < n; i++)
-		dup[i] = *(first + i);	
+	for (size_type i = 0; i < n; i++, first++)
+		dup[i] = *(first);	
 	this->_size = n;
 	if (this->_size_fill < this->_size)
 		this->_size_fill = this->_size;
@@ -319,7 +328,6 @@ typename vector<T, Alloc>::iterator	vector<T, Alloc>::insert(iterator position, 
 
 template <typename T, class Alloc>
 void vector<T, Alloc>::insert (typename vector<T, Alloc>::iterator position,size_t n,typename  vector<T, Alloc>::value_type const &val){
-	std::cout << this->_size_fill << " " << this->_size << std::endl;
 	size_type 		size = this->_size;
 	difference_type pos = position - this->begin(); 
 	
@@ -343,7 +351,12 @@ template <class InputIterator>
 void		vector<T, Alloc>::insert (vector<T, Alloc>::iterator position, InputIterator first, InputIterator last, typename ft::enable_if<!ft::is_integral<InputIterator>::value>::type*){//, typename ft::enable_if<!ft::is_integral<InputIterator>::value>::type*){
 	size_type 		size = this->_size;
 	difference_type pos = position - this->begin();
-	difference_type	size_to_copy = last - first; 
+	InputIterator first2 = first;
+	difference_type	size_to_copy = 0;
+	while (first2 != last){
+		size_to_copy++;
+		first2++;
+	} 
 	
 	T	*dup = new T[this->_size];
 	for (size_type i = 0; i < this->_size; ++i)
@@ -352,8 +365,8 @@ void		vector<T, Alloc>::insert (vector<T, Alloc>::iterator position, InputIterat
 		this->pop_back();
 	for (size_type i = 0; i < (size_t)pos; ++i)
 		this->push_back(dup[i]);
-	for (size_type i = 0; i < (size_t)size_to_copy ; ++i)
-		this->push_back(*(first + i));
+	for (size_type i = 0; i < (size_t)size_to_copy ; ++i, first++)
+		this->push_back(*(first));
 	for (size_type i = (size_type)pos; i < size; ++i)
 		this->push_back(dup[i]);
 	delete[] dup;
@@ -421,8 +434,8 @@ void		vector<T, Alloc>::swap (vector& x){
 template <typename T, class Alloc>
 void		vector<T, Alloc>::clear(){
 	if (this->_size){
-		this->_alloc.deallocate(this->_vector, this->_size);
-		this->_vector = this->_alloc.allocate(0);
+		this->_alloc.deallocate(this->_tab, this->_size);
+		this->_tab = this->_alloc.allocate(0);
 		this->_size = 0;
 	}
 };

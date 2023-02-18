@@ -19,12 +19,12 @@ random_access_iterator_tag<T>::random_access_iterator_tag(pointer ptrin) : ptr(p
 }
 
 template <class T>
-random_access_iterator_tag<T>::random_access_iterator_tag(const random_access_iterator_tag &rhs){
+random_access_iterator_tag<T>::random_access_iterator_tag(const random_access_iterator_tag<typename std::remove_const<T>::type > &rhs){
 	*this = rhs;
 }
 
 template <class T> 
-random_access_iterator_tag<T>		&random_access_iterator_tag<T>::operator=(const random_access_iterator_tag<T> &rhs){
+random_access_iterator_tag<T>		&random_access_iterator_tag<T>::operator=(const random_access_iterator_tag<typename std::remove_const<T>::type > &rhs){
 	this->ptr = rhs.ptr;
 	return (*this);
 }
@@ -56,8 +56,8 @@ random_access_iterator_tag<T>		random_access_iterator_tag<T>::operator--(int){
 }
 
 template <class T> 
-T									&random_access_iterator_tag<T>::operator[](unsigned long i){
-	return (*this->ptr[i]);
+typename random_access_iterator_tag<T>::reference						random_access_iterator_tag<T>::operator[](unsigned long i){
+	return *(this->ptr + i);
 }
 
 template <class T> 
@@ -70,50 +70,54 @@ typename random_access_iterator_tag<T>::pointer					random_access_iterator_tag<T
 	return (this->ptr);
 }
 
-template <typename T>
-bool								ft::operator==(const random_access_iterator_tag<T> &it1, const random_access_iterator_tag<T> &it2){
+template <typename T, typename U>
+bool								ft::operator==(const random_access_iterator_tag<T> &it1, const random_access_iterator_tag<U> &it2){
 	return (it1.ptr == it2.ptr);
 }
 
-template <typename T>
-bool								ft::operator!=(const random_access_iterator_tag<T> &it1, const random_access_iterator_tag<T> &it2){
+template <typename T, typename U>
+bool								ft::operator!=(const random_access_iterator_tag<T> &it1, const random_access_iterator_tag<U> &it2){
 	return (it1.ptr != it2.ptr);
 }
 
-template <typename T>
-bool								ft::operator<(const random_access_iterator_tag<T> &it1, const random_access_iterator_tag<T> &it2){
+template <typename T, typename U>
+bool								ft::operator<(const random_access_iterator_tag<T> &it1, const random_access_iterator_tag<U> &it2){
 	return (it1.ptr < it2.ptr);
 }
 
-template <typename T>
-bool								ft::operator<=(const random_access_iterator_tag<T> &it1, const random_access_iterator_tag<T> &it2){
+template <typename T, typename U>
+bool								ft::operator<=(const random_access_iterator_tag<T> &it1, const random_access_iterator_tag<U> &it2){
 	return (it1.ptr <= it2.ptr);
 }
 
-template <typename T>
-bool								ft::operator>(const random_access_iterator_tag<T> &it1, const random_access_iterator_tag<T> &it2){
+template <typename T, typename U>
+bool								ft::operator>(const random_access_iterator_tag<T> &it1, const random_access_iterator_tag<U> &it2){
 	return (it1.ptr > it2.ptr);
 }
 
-template <typename T>
-bool								ft::operator>=(const random_access_iterator_tag<T> &it1, const random_access_iterator_tag<T> &it2){
+template <typename T, typename U>
+bool								ft::operator>=(const random_access_iterator_tag<T> &it1, const random_access_iterator_tag<U> &it2){
 	return (it1.ptr >= it2.ptr);
 }
 
 template <typename T>
 random_access_iterator_tag<T>		ft::operator+=(const random_access_iterator_tag<T> &it1, typename random_access_iterator_tag<T>::difference_type n){
-	typename random_access_iterator_tag<T>::difference_type m = n;
-	if (m >= 0){
-		while (m--) ++it1.ptr;
-	}
-	else {
-		while (m++) --it1.ptr;
-	}
+	random_access_iterator_tag<T> it2 = it1.ptr + n;
+	return (it2);
+	// typename random_access_iterator_tag<T>::difference_type m = n;
+	// if (m >= 0){
+	// 	while (m--) it1.ptr += 1;
+	// }
+	// else {
+	// 	while (m++) it1.ptr += 1;
+	// }
 }
 
 template <typename T>
 random_access_iterator_tag<T>		ft::operator-=(const random_access_iterator_tag<T> &it1, typename random_access_iterator_tag<T>::difference_type n){
-	return (it1.ptr += (n *= -1));
+	random_access_iterator_tag<T> it2 = it1.ptr - ((n *= -1) + 2) ;
+	return (it2);
+	// return (it1.ptr += (n *= -1));
 }
 
 template <typename T>
@@ -140,8 +144,8 @@ random_access_iterator_tag<T>		ft::operator-(typename random_access_iterator_tag
 	return (it1.ptr - n);
 }
 
-template <typename T>
-typename random_access_iterator_tag<T>::difference_type		ft::operator-(const random_access_iterator_tag<T> &it1, const random_access_iterator_tag<T> &it2){
+template <typename T, typename U>
+typename random_access_iterator_tag<T>::difference_type		ft::operator-(const random_access_iterator_tag<T> &it1, const random_access_iterator_tag<U> &it2){
 	typename random_access_iterator_tag<T>::difference_type tmp;
 
 	if (it1.ptr > it2.ptr)

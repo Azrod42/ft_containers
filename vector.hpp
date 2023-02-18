@@ -21,8 +21,8 @@ namespace ft
 			typedef typename allocator_type::const_reference		const_reference;
 			typedef typename allocator_type::pointer				pointer;
 			typedef typename allocator_type::const_pointer			const_pointer;
-			typedef ft::random_access_iterator_tag<T> 				iterator;
-			typedef ft::random_access_iterator_tag<const T> 		const_iterator;
+			typedef ft::random_access_iterator_tag<value_type> 		iterator;
+			typedef ft::random_access_iterator_tag<const value_type> const_iterator;
 			typedef ft::reverse_iterator<iterator> 					reverse_iterator;
 			typedef ft::reverse_iterator<const_iterator> 			const_reverse_iterator;
 			typedef std::ptrdiff_t									difference_type;
@@ -102,7 +102,7 @@ namespace ft
 			public: virtual const char *what() const throw() { return ("Vector::exception : Invalid argument.");}};
 
 			class OutOfRange : public std::exception {
-			public: virtual const char *what() const throw() { return ("Vector::exception : Out of range.");}};
+			public: virtual const char *what() const throw() { return ("exception: Vector::exception : Out of range.");}};
 
 	};
 	template <typename T, class Alloc>
