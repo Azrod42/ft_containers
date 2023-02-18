@@ -2,7 +2,7 @@ NAME =container
 
 SRCS = main.cpp \
 
-INCLUDE = includes/* 
+INCLUDE = *.hpp *.tpp 
 
 OBJS		=$(SRCS:.cpp=.o)
 CC			=c++
