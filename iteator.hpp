@@ -44,9 +44,9 @@ namespace ft
 		template <typename T, typename U>
 		bool		operator>=(const random_access_iterator_tag<T> &it1, const random_access_iterator_tag<U> &it2);
 		template <typename T>
-		random_access_iterator_tag<T>	operator+=(const random_access_iterator_tag<T> &it1, typename random_access_iterator_tag<T>::difference_type n);
+		random_access_iterator_tag<T>	operator+=( random_access_iterator_tag<T> &it1, typename random_access_iterator_tag<T>::difference_type n);
 		template <typename T>
-		random_access_iterator_tag<T>	operator-=(const random_access_iterator_tag<T> &it1, typename random_access_iterator_tag<T>::difference_type n);
+		random_access_iterator_tag<T>	operator-=( random_access_iterator_tag<T> &it1, typename random_access_iterator_tag<T>::difference_type n);
 		template <typename T>
 		random_access_iterator_tag<T>	operator+(const random_access_iterator_tag<T> &it1, typename random_access_iterator_tag<T>::difference_type n);
 		template <typename T>

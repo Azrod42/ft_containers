@@ -101,9 +101,10 @@ bool								ft::operator>=(const random_access_iterator_tag<T> &it1, const rando
 }
 
 template <typename T>
-random_access_iterator_tag<T>		ft::operator+=(const random_access_iterator_tag<T> &it1, typename random_access_iterator_tag<T>::difference_type n){
-	random_access_iterator_tag<T> it2 = it1.ptr + n;
-	return (it2);
+random_access_iterator_tag<T>		ft::operator+=( random_access_iterator_tag<T> &it1, typename random_access_iterator_tag<T>::difference_type n){
+	// random_access_iterator_tag<T> it2 = it1.ptr + n;
+	it1.ptr += n;
+	return (it1);
 	// typename random_access_iterator_tag<T>::difference_type m = n;
 	// if (m >= 0){
 	// 	while (m--) it1.ptr += 1;
@@ -114,9 +115,10 @@ random_access_iterator_tag<T>		ft::operator+=(const random_access_iterator_tag<T
 }
 
 template <typename T>
-random_access_iterator_tag<T>		ft::operator-=(const random_access_iterator_tag<T> &it1, typename random_access_iterator_tag<T>::difference_type n){
-	random_access_iterator_tag<T> it2 = it1.ptr - ((n *= -1) + 2) ;
-	return (it2);
+random_access_iterator_tag<T>		ft::operator-=( random_access_iterator_tag<T> &it1, typename random_access_iterator_tag<T>::difference_type n){
+	// random_access_iterator_tag<T> it2 = it1.ptr - ((n *= -1) + 2) ;
+	it1.ptr -= n;
+	return (it1);
 	// return (it1.ptr += (n *= -1));
 }
 
@@ -148,10 +150,11 @@ template <typename T, typename U>
 typename random_access_iterator_tag<T>::difference_type		ft::operator-(const random_access_iterator_tag<T> &it1, const random_access_iterator_tag<U> &it2){
 	typename random_access_iterator_tag<T>::difference_type tmp;
 
-	if (it1.ptr > it2.ptr)
-		tmp = it1.ptr - it2.ptr;
-	else
-		tmp = it2.ptr - it1.ptr;
+	// if (it1.ptr > it2.ptr)
+	// 	tmp = it1.ptr - it2.ptr;
+	// else
+	// 	tmp = it2.ptr - it1.ptr;
+	tmp = it1.ptr - it2.ptr;
 	return (tmp);
 }
 #endif

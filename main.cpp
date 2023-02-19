@@ -40,6 +40,17 @@ void	checkErase(TESTED_NAMESPACE::vector<std::string> const &vct, TESTED_NAMESPA
 	printSize(vct);
 }
 
+template <class T, class Alloc>
+void	cmp(const TESTED_NAMESPACE::vector<T, Alloc> &lhs, const TESTED_NAMESPACE::vector<T, Alloc> &rhs)
+{
+	static int i = 0;
+
+	std::cout << "############### [" << i++ << "] ###############"  << std::endl;
+	std::cout << "eq: " << (lhs == rhs) << " | ne: " << (lhs != rhs) << std::endl;
+	std::cout << "lt: " << (lhs <  rhs) << " | le: " << (lhs <= rhs) << std::endl;
+	std::cout << "gt: " << (lhs >  rhs) << " | ge: " << (lhs >= rhs) << std::endl;
+}
+
 void	prepost_incdec(TESTED_NAMESPACE::vector<TESTED_TYPE> &vct)
 {
 	TESTED_NAMESPACE::vector<TESTED_TYPE>::iterator it = vct.begin();
@@ -266,6 +277,50 @@ int main(void){
 	std::cout << "(ite + 3 == it): " << (ite + 3 == it) << std::endl;
 
 	printSize(vct, true);
+}
+{
+	TESTED_NAMESPACE::vector<TESTED_TYPE> vct(4);
+	TESTED_NAMESPACE::vector<TESTED_TYPE> vct2(4);
+
+	cmp(vct, vct);  // 0
+	cmp(vct, vct2); // 1
+
+	vct2.resize(10);
+
+	cmp(vct, vct2); // 2
+	cmp(vct2, vct); // 3
+
+	vct[2] = 42;
+
+	cmp(vct, vct2); // 4
+	cmp(vct2, vct); // 5
+
+	swap(vct, vct2);
+
+	cmp(vct, vct2); // 6
+	cmp(vct2, vct); // 7
+
+}
+{
+	TESTED_NAMESPACE::vector<TESTED_TYPE> vct;
+	TESTED_NAMESPACE::vector<TESTED_TYPE>::iterator it = vct.begin();
+	TESTED_NAMESPACE::vector<TESTED_TYPE>::const_iterator cit = vct.begin();
+
+	TESTED_NAMESPACE::vector<TESTED_TYPE>::reverse_iterator rit(it);
+
+	TESTED_NAMESPACE::vector<TESTED_TYPE>::const_reverse_iterator crit(rit);
+	TESTED_NAMESPACE::vector<TESTED_TYPE>::const_reverse_iterator crit_(it);
+	TESTED_NAMESPACE::vector<TESTED_TYPE>::const_reverse_iterator crit_2(cit);
+
+	/* error expected
+	TESTED_NAMESPACE::vector<TESTED_TYPE>::reverse_iterator rit_(crit);
+	TESTED_NAMESPACE::vector<TESTED_TYPE>::reverse_iterator rit2(cit);
+	TESTED_NAMESPACE::vector<TESTED_TYPE>::iterator it2(rit);
+	TESTED_NAMESPACE::vector<TESTED_TYPE>::const_iterator cit2(crit);
+	*/
+
+	std::cout << "OK" << std::endl;
+	return (0);
 }
 	return (0);
 }

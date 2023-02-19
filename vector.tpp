@@ -413,22 +413,10 @@ typename vector<T, Alloc>::iterator	vector<T, Alloc>::erase (vector<T, Alloc>::i
 
 template <typename T, class Alloc>
 void		vector<T, Alloc>::swap (vector& x){
-	if (x == *this)
-		return ;
-	
-	pointer			six = this->_size;
-	pointer			sfx = this->_size_fill;
-	pointer			tax = this->_tab;
-	allocator_type	alx = this->_alloc;
-
-	x._alloc = this->_alloc;
-	x._size = this->_size;
-	x._size_fill = this->_size_fill;
-	x._tab = this->_tab;
-	this->_size = six;
-	this->_size_fill = sfx;
-	this->_tab = tax;
-	this->_alloc = alx;
+	std::swap(this->_size, x._size);
+	std::swap(this->_size_fill, x._size_fill);
+	std::swap(this->_alloc, x._alloc);
+	std::swap(this->_tab, x._tab);
 };
 
 template <typename T, class Alloc>
