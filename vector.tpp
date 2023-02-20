@@ -159,7 +159,7 @@ void	vector<T, Alloc>::resize (size_type n, value_type val){
 		size_type old = this->_size;
 		this->_size = n;
 		this->_size_fill = n;
-		for(size_type i = old + 1; i < this->_size; i++)
+		for(size_type i = old ; i < this->_size; i++)
 			this->_alloc.construct(this->_tab + i, val);
 	}
 	delete[] dup;
