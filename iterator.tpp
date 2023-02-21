@@ -105,13 +105,6 @@ random_access_iterator_tag<T>		ft::operator+=( random_access_iterator_tag<T> &it
 	// random_access_iterator_tag<T> it2 = it1.ptr + n;
 	it1.ptr += n;
 	return (it1);
-	// typename random_access_iterator_tag<T>::difference_type m = n;
-	// if (m >= 0){
-	// 	while (m--) it1.ptr += 1;
-	// }
-	// else {
-	// 	while (m++) it1.ptr += 1;
-	// }
 }
 
 template <typename T>
